@@ -59,7 +59,7 @@ def build(manifest, destination):
     for i, item in enumerate(config['films']):
         style = item.get('style')
         if style not in STYLES:
-            raise ValueError('Choose Sumi Original, Sumi Light or Sumi Dark')
+            raise ValueError('Choose Sumi Dark, Sumi Light or Sumi Vector')
         status = item.get('status', 'draft')
         if status not in {'draft', 'ready'} or not item.get('review_note'):
             raise ValueError('Each film needs draft/ready status and an honest review note')
@@ -72,6 +72,34 @@ def build(manifest, destination):
             evidence = (manifest.parent / item['review_file']).resolve()
             if not evidence.is_file():
                 raise ValueError('The recorded review file does not exist')
+            try:
+                report = json.loads(evidence.read_text())
+            except ValueError:
+                raise ValueError('review_file must be the JSON report from motion-check.mjs') from None
+            if not isinstance(report, dict) or report.get('status') != 'pass':
+                raise ValueError('A ready film needs a passing motion-check.mjs report')
+            detail = (manifest.parent / str(item.get('detail_file') or '')).resolve()
+            if not item.get('detail_file') or not detail.is_file():
+                raise ValueError('A ready film needs detail_file: the CHECKLIST.md from review-frames.mjs')
+            ticks = detail.read_text()
+            if '- [ ]' in ticks or not re.search(r'^- \[[xX]\] ', ticks, re.M):
+                raise ValueError('The detail check is not finished: every item in detail_file must be ticked')
+            panel = (manifest.parent / str(item.get('audience_file') or '')).resolve()
+            if not item.get('audience_file') or not panel.is_file():
+                raise ValueError('A ready film needs audience_file: the VERDICT.json from the audience panel')
+            verdict = json.loads(panel.read_text())
+            if verdict.get('film_sha256') != metadata['sha256']:
+                raise ValueError('The audience panel reviewed a different version of this film. Review this one, and set film_sha256 to ' + metadata['sha256'])
+            viewers = verdict.get('viewers', [])
+            if len(viewers) < 5 or not all(v.get('pass') is True and v.get('score', 0) >= 7 for v in viewers):
+                raise ValueError('The audience panel has not passed: five viewers must each pass with at least 7')
+            qa = (manifest.parent / str(item.get('qa_file') or '')).resolve()
+            if not item.get('qa_file') or not qa.is_file() or json.loads(qa.read_text()).get('status') != 'pass':
+                raise ValueError('A ready film needs qa_file: a passing QA.json from the quality assurance agent')
+            if json.loads(qa.read_text()).get('film_sha256') != metadata['sha256']:
+                raise ValueError('Quality assurance reviewed a different version of this film. Review this one, and set film_sha256 to ' + metadata['sha256'])
+            if not item.get('approved_by'):
+                raise ValueError('A ready film needs approved_by: the person who watched it')
         poster = (manifest.parent / item['poster']).resolve() if item.get('poster') else None
         if poster and (not poster.is_file() or poster.suffix.lower() not in {'.jpg', '.jpeg', '.png', '.webp'}):
             raise ValueError('Poster must be an existing JPG, PNG or WebP')

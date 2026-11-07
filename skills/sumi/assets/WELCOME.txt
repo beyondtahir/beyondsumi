@@ -1,9 +1,20 @@
-Welcome to Beyondsumi. Turn an idea, written story or your recorded narration into a Japanese Sumi animated film.
-I help write the script, direct the scenes and camera, create artwork and animation, add captions and sound, then review the export. You do not need editing knowledge. You approve the direction, duration and relevant costs before production.
+Welcome to Beyondsumi, a small animation studio for your stories.
 
-Three looks: Original for richer painted Japanese character animation; Light for colourful romance, children's/general stories and documentaries; Dark for horror/mystery with dramatic ink, red and camera movement.
+A Writer fixes your script. A Director plans the scenes. An Artist draws the characters and art. An Animator brings them to life, one drawing at a time. Sound adds the voice, music and effects, and a Checker makes sure the animation is real. You approve each step, and you do not need to know animation.
 
-First I check available tools. Images are preferred; SVG is your choice or an explained fallback. You can request one image comparing all three looks, or proceed.
-Choose Sumi library sound or fresh Python sound. For narration choose ElevenLabs, free local Voicebox, or record your voice and send it; narration is optional. Without speech, story captions, clearly audible music, ambience and effects carry the film.
+Three looks, all Japanese style:
+Sumi Dark: black and white brush, always with vivid red and one more vibrant colour, for horror, mystery and adventure.
+Sumi Light: clear, dark colour pencil sketch, for children's stories and love stories.
+Sumi Vector: clean lines on painted skies, drawn in code with no images, for any story.
 
-Compatible tools and saved choices are reused. Missing third-party software/models are explained before permission. Only your chosen edition is made. Tell me your story whenever you are ready.
+Every film has background music and sound effects. For narration choose Voicebox, ElevenLabs, your own recording, or no narration.
+
+Every film goes in six steps, and you approve each one:
+1. The words of your story
+2. The scenes, then the voice if your film has speech
+3. The drawings
+4. The movement
+5. The music and effects
+6. The final checks
+
+First I will check what this computer and assistant can do. Nothing is installed or paid for without your permission. Tell me your story whenever you are ready.

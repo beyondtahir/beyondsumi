@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sumi Vector"
+  short_description: "Frame-by-frame Sumi films painted in code, with no images"
+  default_prompt: "Use $sumi-vector to paint my film in code, following the studio plan."

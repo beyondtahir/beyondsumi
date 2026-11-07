@@ -1,0 +1,457 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Sumi tools</title>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <filter id="cap-ink" x="-10%" y="-20%" width="120%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3" result="a"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".012 .22" numOctaves="2" seed="9"/>
+    <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 12 -2.6" result="dry"/>
+    <feComposite in="a" in2="dry" operator="in"/>
+  </filter>
+  <filter id="cap-pencil" x="-5%" y="-15%" width="110%" height="130%">
+    <feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="2" seed="6" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" result="a"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="2"/>
+    <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 6 -1.6" result="tooth"/>
+    <feComposite in="a" in2="tooth" operator="in"/>
+  </filter>
+</defs></svg>
+<script>
+/* Image work for the cutter, renderer and checker, using the browser's own canvas. */
+window.pictures = new Map();
+window.ready = true;
+
+async function loadPicture(key, base64) {
+  const bytes = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
+  pictures.set(key, await createImageBitmap(new Blob([bytes], { type: 'image/png' }), { premultiplyAlpha: 'none' }));
+  return [pictures.get(key).width, pictures.get(key).height];
+}
+window.dropPicture = key => { const picture = pictures.get(key); if (picture) picture.close(); pictures.delete(key); };
+
+const pngOf = canvas => canvas.toDataURL('image/png').split(',')[1];
+
+function surface(w, h) {
+  const canvas = document.createElement('canvas');
+  canvas.width = w; canvas.height = h;
+  return [canvas, canvas.getContext('2d', { willReadFrequently: true })];
+}
+
+/* ---- Sheet cutter ---- */
+function paperOf(px, w, h) {
+  const r = [], g = [], b = [], add = i => { r.push(px[i]); g.push(px[i + 1]); b.push(px[i + 2]); };
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (y < 8 || y >= h - 8 || x < 8 || x >= w - 8) add((y * w + x) * 4);
+  const mid = a => a.sort((m, n) => m - n)[a.length >> 1];
+  return [mid(r), mid(g), mid(b)];
+}
+
+function inkOf(px, w, h, paper, threshold) {
+  const ink = new Uint8Array(w * h);
+  for (let i = 0; i < w * h; i++) {
+    const p = i * 4;
+    ink[i] = Math.abs(px[p] - paper[0]) + Math.abs(px[p + 1] - paper[1]) + Math.abs(px[p + 2] - paper[2]) > threshold ? 1 : 0;
+  }
+  return ink;
+}
+
+/* Paper reachable from the cell edge. Paper enclosed by ink, like a pale face, stays solid. */
+function outsidePaper(ink, w, h) {
+  const out = new Uint8Array(w * h), stack = [];
+  const push = i => { if (!ink[i] && !out[i]) { out[i] = 1; stack.push(i); } };
+  for (let x = 0; x < w; x++) { push(x); push((h - 1) * w + x); }
+  for (let y = 0; y < h; y++) { push(y * w); push(y * w + w - 1); }
+  while (stack.length) {
+    const i = stack.pop(), x = i % w;
+    if (x > 0) push(i - 1);
+    if (x < w - 1) push(i + 1);
+    if (i >= w) push(i - w);
+    if (i < w * (h - 1)) push(i + w);
+  }
+  return out;
+}
+
+/* Where the feet are: the lowest ink, and the middle of the ink just above it */
+function feetOf(ink, w, h) {
+  let low = -1;
+  for (let y = h - 1; y >= 0 && low < 0; y--) {
+    let n = 0;
+    for (let x = 0; x < w; x++) n += ink[y * w + x];
+    if (n > w * .01) low = y;
+  }
+  if (low < 0) return null;
+  let sum = 0, n = 0;
+  for (let y = Math.max(0, low - Math.floor(h * .08)); y <= low; y++) for (let x = 0; x < w; x++) if (ink[y * w + x]) { sum += x; n++; }
+  return n ? { y: low, x: sum / n } : null;
+}
+
+function centreOf(ink, w, h) {
+  let sx = 0, sy = 0, n = 0;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (ink[y * w + x]) { sx += x; sy += y; n++; }
+  return n ? { x: sx / n, y: Math.round(sy / n) } : null;
+}
+
+function mark(ink, w, h, mode) {
+  if (mode === 'none') return null;
+  if (mode === 'feet') { const f = feetOf(ink, w, h); return f ? f.y : null; }
+  if (mode === 'centre') { const f = centreOf(ink, w, h); return f ? f.y : null; }
+  if (mode === 'ground') {
+    let best = -1, top = .15;
+    for (let y = Math.floor(h * .6); y < h; y++) {
+      let n = 0;
+      for (let x = 0; x < w; x++) n += ink[y * w + x];
+      if (n / w > top) { top = n / w; best = y; }
+    }
+    return best < 0 ? null : best;
+  }
+  for (let y = h - 1; y >= 0; y--) {
+    let n = 0;
+    for (let x = 0; x < w; x++) n += ink[y * w + x];
+    if (n / w > .01) return y;
+  }
+  return null;
+}
+
+/* Image models do not always space panel rows evenly. Find the clear strip nearest each expected row line. */
+function findRowLines(sheet, rows) {
+  const [, ctx] = surface(sheet.width, sheet.height);
+  ctx.drawImage(sheet, 0, 0);
+  const w = sheet.width, h = sheet.height, px = ctx.getImageData(0, 0, w, h).data, ch = h / rows, lines = [0];
+  const paper = paperOf(px, w, h);
+  const inkAt = y => { let n = 0; for (let x = 0; x < w; x += 4) { const i = (y * w + x) * 4; if (Math.abs(px[i] - paper[0]) + Math.abs(px[i + 1] - paper[1]) + Math.abs(px[i + 2] - paper[2]) > 24) n++; } return n; };
+  for (let k = 1; k < rows; k++) {
+    // The emptiest line near the expected one, so legs and feet are never mistaken for a gap
+    const want = k * ch; let best = want, bestScore = Infinity;
+    for (let y = Math.round(want - ch * .25); y <= Math.round(want + ch * .25); y++) {
+      const score = inkAt(y) + Math.abs(y - want) * .02;
+      if (score < bestScore) { bestScore = score; best = y; }
+    }
+    lines.push(Math.round(best));
+  }
+  lines.push(h);
+  return lines;
+}
+
+/* A panel border left behind by the model: one thin straight line across the whole drawing, with nothing like it either side */
+function clearPanelLines(px, w, h) {
+  const row = y => { let n = 0; for (let x = 0; x < w; x++) if (px[(y * w + x) * 4 + 3]) n++; return n / w; };
+  const col = x => { let n = 0; for (let y = 0; y < h; y++) if (px[(y * w + x) * 4 + 3]) n++; return n / h; };
+  const rows = Array.from({ length: h }, (_, y) => row(y)), cols = Array.from({ length: w }, (_, x) => col(x));
+  for (let y = 0; y < h; y++) if (rows[y] > .55 && (rows[y - 8] ?? 0) < .35 && (rows[y + 8] ?? 0) < .35) for (let k = Math.max(0, y - 3); k <= Math.min(h - 1, y + 3); k++) for (let x = 0; x < w; x++) if (rows[k] > .35) px[(k * w + x) * 4 + 3] = 0;
+  for (let x = 0; x < w; x++) if (cols[x] > .55 && (cols[x - 8] ?? 0) < .35 && (cols[x + 8] ?? 0) < .35) for (let k = Math.max(0, x - 3); k <= Math.min(w - 1, x + 3); k++) for (let y = 0; y < h; y++) if (cols[k] > .35) px[(y * w + k) * 4 + 3] = 0;
+}
+
+/* Find real panels for edge-to-edge sheets: a gutter is a line of one even colour, whatever the colour is. */
+function findPanels(sheet, cols, rows) {
+  const [, ctx] = surface(sheet.width, sheet.height);
+  ctx.drawImage(sheet, 0, 0);
+  const w = sheet.width, h = sheet.height, px = ctx.getImageData(0, 0, w, h).data;
+  const even = (n, step, at) => {
+    let r = 0, g = 0, b = 0, c = 0;
+    for (let i = 0; i < n; i += step) { const p = at(i) * 4; r += px[p]; g += px[p + 1]; b += px[p + 2]; c++; }
+    r /= c; g /= c; b /= c;
+    let off = 0;
+    for (let i = 0; i < n; i += step) { const p = at(i) * 4; if (Math.abs(px[p] - r) + Math.abs(px[p + 1] - g) + Math.abs(px[p + 2] - b) > 30) off++; }
+    return off / c < .03;
+  };
+  const runs = (length, clear, count) => {
+    const found = [];
+    let start = -1;
+    for (let i = 0; i <= length; i++) {
+      const content = i < length && !clear(i);
+      if (content && start < 0) start = i;
+      if (!content && start >= 0) { if (i - start > length / count * .4) found.push([start, i]); start = -1; }
+    }
+    return found.length === count ? found : null;
+  };
+  const down = runs(h, y => even(w, 3, x => y * w + x), rows), across = runs(w, x => even(h, 3, y => y * w + x), cols);
+  return down && across ? { down, across, cw: Math.min(...across.map(a => a[1] - a[0])), ch: Math.min(...down.map(a => a[1] - a[0])) } : null;
+}
+
+/* Paper trapped inside a figure, like the gap between fingers or under hair. Small white shapes such as eyes stay. */
+function clearHoles(px, ink, out, w, h, area) {
+  const seen = new Uint8Array(w * h);
+  for (let s = 0; s < w * h; s++) {
+    if (ink[s] || out[s] || seen[s]) continue;
+    const stack = [s], list = [];
+    seen[s] = 1;
+    while (stack.length) {
+      const i = stack.pop(), x = i % w;
+      list.push(i);
+      for (const n of [x > 0 ? i - 1 : -1, x < w - 1 ? i + 1 : -1, i >= w ? i - w : -1, i < w * (h - 1) ? i + w : -1]) if (n >= 0 && !ink[n] && !out[n] && !seen[n]) { seen[n] = 1; stack.push(n); }
+    }
+    if (list.length >= area) for (const i of list) px[i * 4 + 3] = 0;
+  }
+}
+
+function cutSheet(key, cols, rows, opts) {
+  const sheet = pictures.get(key), cw = sheet.width / cols, ch = sheet.height / rows, inset = opts.inset || 0;
+  const panels = opts.panels ? findPanels(sheet, cols, rows) : null;
+  if (opts.panels && !panels) throw new Error('Could not find ' + cols + ' by ' + rows + ' panels. Look at the sheet, and cut without --panels.');
+  const lines = opts.gutters ? findRowLines(sheet, rows) : null, tallest = lines ? Math.max(...lines.slice(1).map((v, i) => v - lines[i])) : 0;
+  const cells = [];
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    if (opts.count && cells.length >= opts.count) break;
+    const x = panels ? panels.across[c][0] + 2 : Math.round(c * cw) + inset, y = panels ? panels.down[r][0] + 2 : (lines ? lines[r] : Math.round(r * ch)) + inset;
+    const w = panels ? panels.cw - 4 : Math.round((c + 1) * cw) - inset - x, sliceH = panels ? panels.ch - 4 : (lines ? lines[r + 1] : Math.round((r + 1) * ch)) - inset - y, h = !panels && lines ? tallest - inset * 2 : sliceH;
+    const [canvas, ctx] = surface(w, h);
+    if (lines) { const p = ctx.getImageData(0, 0, 1, 1); ctx.fillStyle = 'rgb(' + paperOf(ctx.drawImage(sheet, x, y, 8, 8, 0, 0, 8, 8) || ctx.getImageData(0, 0, 8, 8).data, 8, 8).join(',') + ')'; ctx.fillRect(0, 0, w, h); }
+    ctx.drawImage(sheet, x, y, w, sliceH, 0, 0, w, sliceH);
+    const data = ctx.getImageData(0, 0, w, h), paper = paperOf(data.data, w, h), ink = inkOf(data.data, w, h, paper, opts.threshold);
+    cells.push({ canvas, ctx, data, paper, ink, w, h, share: ink.reduce((s, v) => s + v, 0) / (w * h), mark: mark(ink, w, h, opts.align), feet: opts.align === 'feet' ? feetOf(ink, w, h) : opts.align === 'centre' ? centreOf(ink, w, h) : null });
+  }
+  const known = cells.map(c => c.mark).filter(m => m !== null).sort((a, b) => a - b);
+  const target = known.length ? known[known.length >> 1] : 0;
+  const xs = cells.map(c => c.feet && c.feet.x).filter(v => v !== null && v !== undefined).sort((a, b) => a - b), targetX = xs.length ? xs[xs.length >> 1] : 0;
+  return cells.map(cell => {
+    // A wild result means the mark was misread, so leave that drawing where it is and report it
+    let shift = cell.mark === null ? 0 : target - cell.mark, wild = false;
+    if (Math.abs(shift) > cell.h * (opts.maxShift || .05)) { shift = 0; wild = true; }
+    let shiftX = cell.feet ? Math.round(targetX - cell.feet.x) : 0;
+    if (Math.abs(shiftX) > cell.w * (opts.maxShift || .15)) { shiftX = 0; wild = true; }
+    if (opts.cutout) {
+      const out = outsidePaper(cell.ink, cell.w, cell.h), px = cell.data.data;
+      for (let i = 0; i < out.length; i++) px[i * 4 + 3] = out[i] ? 0 : 255;
+      clearPanelLines(px, cell.w, cell.h);
+      if (opts.holes) clearHoles(px, cell.ink, out, cell.w, cell.h, opts.holes);
+      cell.ctx.putImageData(cell.data, 0, 0);
+    }
+    const [final, fx] = surface(cell.w, cell.h);
+    if (!opts.cutout) { fx.fillStyle = `rgb(${cell.paper.join(',')})`; fx.fillRect(0, 0, cell.w, cell.h); }
+    if (opts.cutout) fx.filter = 'blur(.6px)';
+    fx.drawImage(cell.canvas, shiftX, shift);
+    return { png: pngOf(final), shift, shiftX, wild, share: cell.share, w: cell.w, h: cell.h };
+  });
+}
+
+/* ---- Renderer: a layer can only be placed and moved as a whole ---- */
+const stage = {};
+function openStage(w, h, paper) {
+  stage.w = w; stage.h = h; stage.paper = paper;
+  [stage.canvas, stage.ctx] = surface(w, h);
+  [stage.spare, stage.spareCtx] = surface(w, h);
+}
+
+function drawScene(ctx, layers) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = stage.paper; ctx.fillRect(0, 0, stage.w, stage.h);
+  ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+  for (const l of layers) {
+    const pic = pictures.get(l.key);
+    const dw = pic.width * l.scale, dh = pic.height * l.scale;
+    ctx.globalAlpha = l.opacity;
+    ctx.globalCompositeOperation = { normal: 'source-over', multiply: 'multiply', screen: 'screen' }[l.blend];
+    ctx.setTransform(l.zoom, 0, 0, l.zoom, stage.w / 2 - l.zoom * (stage.w / 2 + l.ox - l.x), stage.h / 2 - l.zoom * (stage.h / 2 + l.oy - l.y));
+    ctx.drawImage(pic, -dw / 2, -dh / 2, dw, dh);
+  }
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+}
+
+/* ---- Captions: each style has its own lettering and its own way of arriving, word by word ---- */
+const CAPTION_STYLES = {
+  dark: { font: s => `${62 * s}px Impact, 'Arial Black', Haettenschweiler, 'Liberation Sans Narrow', sans-serif`, fill: '#f7f3e8', accent: '#e8341f', outline: '#08080a', line: 8, filter: 'url(#cap-ink)', y: .86, gap: .3 },
+  light: { font: s => `700 ${54 * s}px 'Bradley Hand', 'Segoe Print', 'Comic Sans MS', 'URW Chancery L', cursive`, fill: '#1a1824', accent: '#b81f2e', paper: 'rgba(244,238,223,.93)', filter: 'url(#cap-pencil)', y: .87, gap: .28 },
+  vector: { font: s => `700 ${46 * s}px 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif`, fill: '#ffffff', accent: '#ffe45c', outline: '#101014', line: 7, y: .88, gap: .28 }
+};
+const clamp01 = v => Math.max(0, Math.min(1, v));
+
+/* Where a caption sits, and how it behaves. The Director chooses these for each caption, from the story. */
+const CAPTION_PLACES = {
+  bottom: { x: .5, y: null, limit: .78 }, top: { x: .5, y: .17, limit: .78 }, center: { x: .5, y: .52, limit: .8 },
+  left: { x: .25, y: .5, limit: .4 }, right: { x: .75, y: .5, limit: .4 },
+  'top-left': { x: .25, y: .18, limit: .4 }, 'top-right': { x: .75, y: .18, limit: .4 },
+  'bottom-left': { x: .25, y: .84, limit: .4 }, 'bottom-right': { x: .75, y: .84, limit: .4 }
+};
+const CAPTION_MOODS = {
+  normal: { size: 1, enter: 1 },
+  whisper: { size: .8, enter: 3.2, alpha: .92 },
+  shout: { size: 1.85, enter: .7, shake: 1 },
+  slam: { size: 2.6, enter: .55, shake: 1.6 },
+  tremble: { size: 1, enter: 1.6, tremble: 3.2 },
+  drift: { size: .9, enter: 2.6, drift: 1 },
+  slow: { size: 1.1, enter: 4 }
+};
+
+function placeOf(c, spec) {
+  const named = typeof c.place === 'string' ? CAPTION_PLACES[c.place] : null;
+  if (c.place && typeof c.place === 'object') return { x: c.place.x, y: c.place.y, limit: c.place.limit || .5 };
+  const place = named || CAPTION_PLACES.bottom;
+  return { x: place.x, y: place.y === null ? spec.y : place.y, limit: place.limit };
+}
+
+function layoutCaption(ctx, words, spec, scale, place) {
+  ctx.font = spec.font(scale);
+  const space = ctx.measureText(' ').width + 4 * scale, limit = stage.w * place.limit, lines = [[]];
+  let used = 0;
+  words.forEach(word => {
+    const w = ctx.measureText(word.w).width;
+    if (used && used + space + w > limit) { lines.push([]); used = 0; }
+    lines[lines.length - 1].push({ ...word, width: w });
+    used += (used ? space : 0) + w;
+  });
+  const height = parseFloat(spec.font(scale).match(/([\d.]+)px/)[1]) * 1.16;
+  return lines.map((line, i) => {
+    const total = line.reduce((a, w) => a + w.width, 0) + space * (line.length - 1);
+    const centre = stage.w * place.x, left = centre - total / 2;
+    let x = left;
+    const y = stage.h * place.y - (lines.length - 1 - i) * height;
+    line.forEach(word => { word.x = x; word.y = y; x += word.width + space; });
+    return { words: line, y, left, width: total, height };
+  });
+}
+
+function splash(ctx, x, y, width, seed, colour, scale, age) {
+  let r = seed;
+  const next = () => (r = (r * 16807) % 2147483647) / 2147483647;
+  ctx.fillStyle = colour;
+  const grow = clamp01(age / .12);
+  for (let i = 0; i < 14; i++) {
+    const a = next() * 6.283, d = (width * .36 + next() * width * .42) * grow, size = (1.5 + next() * 6) * scale;
+    ctx.beginPath();
+    ctx.ellipse(x + width / 2 + Math.cos(a) * d, y - 22 * scale + Math.sin(a) * d * .42, size * 1.3, size, a, 0, 7);
+    ctx.fill();
+  }
+}
+
+function caption(ctx, c) {
+  const spec = CAPTION_STYLES[c.style] || CAPTION_STYLES.dark, mood = CAPTION_MOODS[c.mood] || CAPTION_MOODS.normal;
+  const scale = c.scale * mood.size * (c.size || 1);
+  c.words.forEach((w, i) => { w.next = c.words[i + 1] ? c.words[i + 1].at : undefined; });
+  const lines = layoutCaption(ctx, c.words, spec, scale, placeOf(c, spec));
+  const exit = clamp01((c.end - c.t) / .12) * (mood.alpha || 1);
+  const first = c.words.length ? c.words[0].at : c.start;
+  ctx.save();
+  ctx.font = spec.font(scale);
+  ctx.textBaseline = 'alphabetic';
+  ctx.lineJoin = 'round';
+  if (mood.shake) {
+    // The impact shakes the words for a moment as they land
+    const hit = c.t - first, power = clamp01(1 - hit / .28) * mood.shake * 9 * c.scale;
+    if (hit >= 0) ctx.translate(Math.sin(c.t * 91) * power, Math.cos(c.t * 77) * power);
+  }
+  if (spec.paper) {
+    const started = clamp01((c.t - c.start) / .1);
+    lines.forEach(line => {
+      ctx.save();
+      ctx.globalAlpha = exit * started;
+      ctx.fillStyle = spec.paper;
+      if (spec.filter) ctx.filter = spec.filter;
+      const shown = line.words.filter(w => w.at <= c.t);
+      if (shown.length) { const last = shown[shown.length - 1]; ctx.fillRect(line.left - 26 * scale, line.y - line.height * .78, last.x + last.width - line.left + 52 * scale, line.height * 1.02); }
+      ctx.restore();
+    });
+  }
+  lines.flatMap(l => l.words).forEach(word => {
+    const age = c.t - word.at;
+    if (age < 0) return;
+    const fill = word.key ? spec.accent : (c.colour || spec.fill);
+    ctx.save();
+    ctx.globalAlpha = exit;
+    if (mood.tremble) {
+      const seed = word.x * .13;
+      ctx.translate(Math.sin(c.t * 47 + seed) * mood.tremble * c.scale, Math.cos(c.t * 59 + seed * 2) * mood.tremble * c.scale);
+    }
+    if (mood.drift) ctx.translate(age * 16 * c.scale, -age * 11 * c.scale - Math.sin(age * 2 + word.x * .02) * 5 * c.scale);
+    if (c.style === 'dark') {
+      // Words land hard, and a key word throws ink
+      const u = clamp01(age / (.09 * mood.enter)), grow = mood.enter > 1.5 ? 1 : 1 + (1 - u) * (1 - u) * .42;
+      ctx.globalAlpha = exit * clamp01(age / (.035 * mood.enter * (mood.enter > 1.5 ? 3 : 1)));
+      if (word.key) splash(ctx, word.x, word.y, word.width, 1 + word.w.length * 7919 + Math.round(word.at * 97), spec.accent, scale, age);
+      ctx.translate(word.x + word.width / 2, word.y - 22 * scale);
+      ctx.scale(grow, grow);
+      ctx.translate(-word.width / 2, 22 * scale);
+      // Outline stays solid, so the letters stay readable over any background
+      ctx.strokeStyle = spec.outline; ctx.lineWidth = spec.line * scale;
+      ctx.strokeText(word.w, 0, 0);
+      if (spec.filter && scale >= 1.4) ctx.filter = spec.filter;
+      ctx.fillStyle = fill; ctx.fillText(word.w, 0, 0);
+    } else if (c.style === 'light') {
+      // Each word writes itself on, like a pencil drawing it
+      // One word finishes before the next begins, as a hand would write
+      const writing = Math.min(Math.max(.16, word.w.length * .035) * mood.enter, word.next === undefined ? 9 : Math.max(.05, word.next - word.at));
+      const reveal = clamp01(age / writing);
+      ctx.beginPath();
+      ctx.rect(word.x - 8 * scale, word.y - 70 * scale, (word.width + 16 * scale) * reveal, 100 * scale);
+      ctx.clip();
+      if (spec.filter) ctx.filter = spec.filter;
+      ctx.fillStyle = fill; ctx.fillText(word.w, word.x, word.y);
+    } else {
+      // Clean fade, like TV subtitles
+      ctx.globalAlpha = exit * clamp01(age / (.1 * mood.enter));
+      ctx.strokeStyle = spec.outline; ctx.lineWidth = spec.line * scale;
+      ctx.strokeText(word.w, word.x, word.y);
+      ctx.fillStyle = fill; ctx.fillText(word.w, word.x, word.y);
+    }
+    ctx.restore();
+  });
+  ctx.restore();
+}
+
+function renderFrame(frame) {
+  const ctx = stage.ctx;
+  drawScene(ctx, frame.layers);
+  if (frame.incoming) {
+    drawScene(stage.spareCtx, frame.incoming.layers);
+    ctx.globalAlpha = frame.incoming.mix;
+    ctx.drawImage(stage.spare, 0, 0);
+    ctx.globalAlpha = 1;
+  }
+  (frame.overlays || []).forEach(key => ctx.drawImage(pictures.get(key), 0, 0, stage.w, stage.h));
+  (frame.captions || []).forEach(c => caption(ctx, c));
+  return pngOf(stage.canvas);
+}
+
+/* ---- Checker: where a drawing sits in its frame, and whether it touches the edge ---- */
+function drawingFacts(key) {
+  const pic = pictures.get(key), w = pic.width, h = pic.height, [, ctx] = surface(w, h);
+  ctx.drawImage(pic, 0, 0);
+  const px = ctx.getImageData(0, 0, w, h).data, touch = { top: 0, bottom: 0, left: 0, right: 0 };
+  let top = h, bottom = -1, left = w, right = -1, n = 0, sx = 0, sy = 0;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    if (px[(y * w + x) * 4 + 3] <= 128) continue;
+    n++; sx += x; sy += y;
+    if (y < top) top = y; if (y > bottom) bottom = y; if (x < left) left = x; if (x > right) right = x;
+    if (y < 2) touch.top++; if (y >= h - 2) touch.bottom++; if (x < 2) touch.left++; if (x >= w - 2) touch.right++;
+  }
+  // A box left by a failed cut-out: long, perfectly straight edges both ways, inside the frame
+  let wide = 0, tall = 0;
+  const solid = (x, y) => px[(y * w + x) * 4 + 3] > 128;
+  for (let y = 3; y < h - 3; y += 1) { let run = 0; for (let x = 0; x < w; x++) { run = solid(x, y) !== solid(x, y - 1) ? run + 1 : 0; if (run > wide) wide = run; } }
+  for (let x = 3; x < w - 3; x += 1) { let run = 0; for (let y = 0; y < h; y++) { run = solid(x, y) !== solid(x - 1, y) ? run + 1 : 0; if (run > tall) tall = run; } }
+  touch.box = wide > 160 && tall > 160 && n < w * h * .985;
+  return { w, h, top, bottom, left, right, touch, cx: n ? sx / n : 0, cy: n ? sy / n : 0, empty: n < 50, solid: n > w * h * .985 };
+}
+
+/* ---- Checker: how much vivid red and other vibrant colour a picture has ---- */
+function colourFacts(key) {
+  const pic = pictures.get(key), [, ctx] = surface(320, 180);
+  ctx.clearRect(0, 0, 320, 180);
+  ctx.drawImage(pic, 0, 0, 320, 180);
+  const px = ctx.getImageData(0, 0, 320, 180).data;
+  let red = 0, other = 0;
+  for (let i = 0; i < px.length; i += 4) {
+    if (px[i + 3] < 128) continue;
+    const r = px[i] / 255, g = px[i + 1] / 255, b = px[i + 2] / 255, top = Math.max(r, g, b), low = Math.min(r, g, b), range = top - low;
+    if (top < .4 || range / (top || 1) < .5) continue;
+    const hue = (top === r ? ((g - b) / range + 6) % 6 : top === g ? (b - r) / range + 2 : (r - g) / range + 4) * 60;
+    if (hue < 18 || hue > 342) red++; else other++;
+  }
+  return { red, other };
+}
+
+/* ---- Checker: the silhouette of a drawing ---- */
+function silhouette(key) {
+  const pic = pictures.get(key), [, ctx] = surface(256, 256);
+  ctx.drawImage(pic, 0, 0, 256, 256);
+  const px = ctx.getImageData(0, 0, 256, 256).data, n = 65536;
+  let solid = 0, sum = 0;
+  for (let i = 0; i < n; i++) { if (px[i * 4 + 3] > 128) solid++; sum += (px[i * 4] + px[i * 4 + 1] + px[i * 4 + 2]) / 3; }
+  const mean = sum / n, on = [];
+  for (let i = 0; i < n; i++) {
+    const v = solid === n ? (px[i * 4] + px[i * 4 + 1] + px[i * 4 + 2]) / 3 < mean - 25 : px[i * 4 + 3] > 128;
+    if (v) on.push(i);
+  }
+  return on;
+}
+</script>

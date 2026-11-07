@@ -16,7 +16,7 @@ import sumi_memory as memory
 import sumi_setup as setup
 
 def load_voice():
-    spec=importlib.util.spec_from_file_location('sumi_test_voice',SKILL/'assets/remotion-starter/scripts/elevenlabs_voice.py')
+    spec=importlib.util.spec_from_file_location('sumi_test_voice',SKILL.parent/'sumi-elevenlabs/scripts/elevenlabs_voice.py')
     module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
 
 class Contracts(unittest.TestCase):
@@ -57,30 +57,10 @@ class Contracts(unittest.TestCase):
         self.cli('sumi_memory.py','--state-dir',self.root,'set','storage','local','--reason','Explicit choice',ok=False)
         self.assertEqual(p.read_text(),'{broken')
 
-    def test_dependency_preview_never_invokes_installer(self):
-        p=self.project()
-        with patch.object(setup,'command',return_value={'status':'available'}),patch.object(setup.shutil,'which',return_value='/fake/npm'),patch.object(setup.subprocess,'run') as runner:
-            result=setup.install_project(p,False)
-        self.assertEqual(result['action'],'approval_required');runner.assert_not_called();self.assertFalse((p/'node_modules').exists())
 
-    def test_existing_matching_dependencies_are_reused(self):
-        p=self.project();installed=p/'node_modules/remotion';installed.mkdir(parents=True);(installed/'package.json').write_text('{"version":"4.0.516"}')
-        with patch.object(setup.shutil,'which',return_value='/fake/npm'),patch.object(setup,'run',return_value={'exit_code':0,'output':'{}'}) as runner:
-            result=setup.install_project(p,True)
-        self.assertEqual(result['action'],'reused');self.assertEqual(runner.call_args.args[0][1],'ls')
 
-    def test_wrong_dependency_version_is_not_ready(self):
-        p=self.project();installed=p/'node_modules/remotion';installed.mkdir(parents=True);(installed/'package.json').write_text('{"version":"4.0.100"}')
-        self.assertFalse(setup.project_packages(p)['ready'])
 
-    def test_missing_and_old_node_are_distinct(self):
-        with patch.object(setup.shutil,'which',return_value=None):self.assertEqual(setup.command('node',minimum=(20,0))['status'],'not_found_on_PATH')
-        with patch.object(setup.shutil,'which',return_value='/fake/node'),patch.object(setup,'run',return_value={'exit_code':0,'output':'v18.20.0'}):self.assertEqual(setup.command('node',minimum=(20,0))['status'],'incompatible')
 
-    def test_windows_npm_launcher_uses_command_interpreter(self):
-        args=setup.command_argv(['C:\\Program Files\\nodejs\\npm.cmd','ci'],windows=True)
-        self.assertEqual(args[1:4],['/d','/s','/c']);self.assertIn('"C:\\Program Files\\nodejs\\npm.cmd"',args[4])
-        self.assertEqual(setup.command_argv(['/usr/bin/node','--version'],windows=False),['/usr/bin/node','--version'])
 
     def test_local_voicebox_detection_gets_only_status(self):
         calls=[]
@@ -90,22 +70,7 @@ class Contracts(unittest.TestCase):
         with patch.object(setup.urllib.request,'build_opener',return_value=Opener()):result=setup.voicebox_status(17493)
         self.assertEqual(calls,['http://127.0.0.1:17493/models/status']);self.assertTrue(result['models'][0]['downloaded']);self.assertNotIn('secret',result['models'][0])
 
-    def test_initializer_creates_memory_and_refuses_overwrite(self):
-        dest=self.root/'film'
-        self.cli('new_remotion_project.py',dest,'--method','drawn-acting','--title','A small kindness','--seconds','12')
-        self.assertTrue((dest/'SUMI-PROJECT.md').is_file());self.assertTrue((dest/'DIRECTION-PLAN.md').is_file())
-        self.assertEqual(json.loads((dest/'project.json').read_text())['storyPlanStatus'],'not-authored')
-        self.cli('new_remotion_project.py',dest,ok=False)
-        self.assertFalse((dest/'node_modules').exists())
 
-    def test_skill_update_backs_up_old_files_preserves_user_preferences(self):
-        dest=self.root/'skills/sumi';dest.mkdir(parents=True);(dest/'SKILL.md').write_text('old skill')
-        state=self.root/'state';memory.write(state/'user.json',{'schema_version':1,'preferences':{'storage':{'value':'local','reason':'user'}},'onboarding':{'first_run':{'shown_at':'earlier'}}})
-        self.cli('install_skill.py','--destination',dest,'--state-dir',state,ok=False)
-        self.cli('install_skill.py','--destination',dest,'--state-dir',state,'--replace')
-        backups=list((self.root/'sumi-skill-backups').glob('*/SKILL.md'));self.assertEqual(len(backups),1);self.assertEqual(backups[0].read_text(),'old skill')
-        data=memory.read(state/'user.json');self.assertEqual(data['preferences']['storage']['value'],'local');self.assertEqual(data['onboarding']['first_run']['shown_at'],'earlier')
-        self.assertEqual((dest/'SKILL.md').read_bytes(), (SKILL/'SKILL.md').read_bytes())
 
     def test_v4_route_stops_before_credentials_or_paid_request(self):
         voice=load_voice()

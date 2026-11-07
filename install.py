@@ -4,7 +4,8 @@ import argparse,json,shutil,subprocess,sys,tempfile,uuid
 from datetime import datetime,timezone
 from pathlib import Path
 
-NAMES=['sumi','sumi-svg','sumi-voicebox','sumi-elevenlabs']
+RETIRED=['sumi-svg']
+NAMES=['sumi','sumi-writer','sumi-director','sumi-artist','sumi-animator','sumi-sound','sumi-checker','sumi-elevenlabs','sumi-voicebox','sumi-vector']
 
 def install(source,root,replace=False,names=None):
     names=names or NAMES
@@ -19,6 +20,9 @@ def install(source,root,replace=False,names=None):
     root.mkdir(parents=True,exist_ok=True);backup=root.parent/'sumi-suite-backups'/(datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'-'+uuid.uuid4().hex[:8])
     staged=Path(tempfile.mkdtemp(prefix='.sumi-suite-',dir=root.parent));moved=[];installed=[]
     try:
+        for name in RETIRED if replace else []:
+            old=root/name
+            if old.exists() or old.is_symlink():backup.mkdir(parents=True,exist_ok=True);old.rename(backup/name);moved.append(name)
         for name in names:shutil.copytree(source/'skills'/name,staged/name,ignore=shutil.ignore_patterns('__pycache__','*.pyc','node_modules','.DS_Store'))
         for name in names:
             target=root/name
@@ -29,7 +33,7 @@ def install(source,root,replace=False,names=None):
         for name in reversed(moved):(backup/name).rename(root/name)
         raise
     finally:shutil.rmtree(staged,ignore_errors=True)
-    return {'installed':[str(root/name) for name in names],'backup':str(backup) if moved else None,'third_party_software_installed':False,'model_downloads':0,'paid_calls':0}
+    return {'installed':[str(root/name) for name in names],'retired':[n for n in moved if n in RETIRED],'backup':str(backup) if moved else None,'third_party_software_installed':False,'model_downloads':0,'paid_calls':0}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--skills-root',type=Path,required=True,help="The current host's documented skills directory; no guessed agent-specific location.");p.add_argument('--replace',action='store_true');p.add_argument('--state-dir',type=Path);p.add_argument('--only',nargs='+',choices=NAMES);a=p.parse_args()

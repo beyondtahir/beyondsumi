@@ -16,7 +16,7 @@ On Windows PowerShell, use:
 py -3 install.py --skills-root "$env:USERPROFILE\.kimi\skills"
 ```
 
-4. Look for four installed names and the requirements report. This copies the skills and checks tools; it does not buy API usage or download voice models. If Python is missing or a skill already exists, use [the troubleshooting steps](shared.md#when-something-does-not-work).
+4. Look for the ten installed skills and the requirements report. This copies the skills and checks tools; it does not buy API usage or download voice models. If Python is missing or a skill already exists, use [the troubleshooting steps](shared.md#when-something-does-not-work).
 5. Open a fresh Kimi Code session and ask it to use sumi. For an explicit folder, Kimi documents kimi --skills-dir /absolute/path/to/skills. A model called Kimi in another app uses that app's installation method.
 6. Paste the first-use request from [the simple usage guide](../beginner-use.md). Expect a welcome, a capability check and choices for art, voice and sound before a film starts.
 

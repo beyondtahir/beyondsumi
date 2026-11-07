@@ -1,0 +1,20 @@
+{
+  "name": "beyondsumi",
+  "version": "2.0.0",
+  "description": "A frame-by-frame Sumi animation studio that guides beginners through every film: writer, director, artist, animator, sound and checker, in Sumi Dark, Sumi Light and Sumi Vector.",
+  "author": {
+    "name": "Beyond Tahir",
+    "url": "https://github.com/beyondtahir"
+  },
+  "homepage": "https://beyondtahir.github.io/beyondsumi/",
+  "repository": "https://github.com/beyondtahir/beyondsumi",
+  "license": "MIT",
+  "keywords": [
+    "animation",
+    "sumi",
+    "anime",
+    "storytelling",
+    "video",
+    "frame-by-frame"
+  ]
+}

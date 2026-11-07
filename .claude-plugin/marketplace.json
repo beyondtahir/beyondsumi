@@ -1,0 +1,19 @@
+{
+  "name": "beyondsumi",
+  "owner": {
+    "name": "Beyond Tahir",
+    "url": "https://github.com/beyondtahir"
+  },
+  "plugins": [
+    {
+      "name": "beyondsumi",
+      "source": "./",
+      "description": "A frame-by-frame Sumi animation studio that guides beginners through every film: writer, director, artist, animator, sound and checker, in Sumi Dark, Sumi Light and Sumi Vector.",
+      "version": "2.0.0",
+      "category": "creative"
+    }
+  ],
+  "metadata": {
+    "description": "Beyondsumi by Beyond Tahir: frame-by-frame Japanese animated films from your story."
+  }
+}

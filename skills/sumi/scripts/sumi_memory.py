@@ -11,8 +11,8 @@ import tempfile
 from sumi_catalog import VERSION, CATALOG_ID, STYLES, LEGACY_METHODS
 
 CHOICES = {
-    'audio_mode': {'library-first','python-only','ask'},
-    'image_route': {'images','svg','supplied','ask'},
+    'audio_mode': {'library-first','supplied','ask'},
+    'image_route': {'images','vector','supplied','ask'},
     'animation_identity': {'japanese-sumi'},
     'animation_catalog': {CATALOG_ID},
     'character_workflow': {'complete-reference-first'},
@@ -20,7 +20,7 @@ CHOICES = {
     'preferred_style': set(STYLES) | {'auto'},
     'aspect_ratio': {'16:9','9:16','1:1','ask'},
     'narration_provider': {'elevenlabs','voicebox','supplied','none','ask'},
-    'background_audio': {'python','supplied','silence','ask'},
+    'background_audio': {'library','supplied','ask'},
     'storage': {'local','ask'},
     'runtime_rule': {'ask_before_change'},
     'captions': {'auto','on','off','ask'},

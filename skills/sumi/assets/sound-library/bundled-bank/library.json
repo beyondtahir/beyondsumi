@@ -1,272 +1,280 @@
 {
-  "schema": "sumi-local-sound-bank-v1",
-  "music": {
-    "tender": {
-      "id": "tender",
-      "name": "Tender Connection",
-      "duration": 28.666666666666668,
-      "body_seconds": 26.666666666666668,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -19.883960895096727,
-        "rms_dbfs": -32.40841661122997,
-        "silent": false
-      },
-      "files": {
-        "music/tender/harmony.wav": "673bef89c0708e2c1f0a09ac853e8db81138592f7ce43e280a46c878e8a2e44f",
-        "music/tender/melody.wav": "3de2499aff2cddf54f79a5705cc96c29f07c1422d0bef484e7b96ab83049eff5",
-        "music/tender/preview.wav": "c7e1e95599b0184ee425acb80da316c175fd4ac715782ddfbc1abe13e4e926ad",
-        "music/tender/rhythm.wav": "744f1f50e2100e74967aa30508e48715c88dbd309e45e8353ed004293f471e60",
-        "music/tender/score.json": "0dfcfbc739c432620ee51c893d2263f6e3c04991a26fe872439ad6fc7ba9ddcb"
-      }
-    },
-    "love": {
-      "id": "love",
-      "name": "A Quiet Promise",
-      "duration": 27.263166666666667,
-      "body_seconds": 25.263157894736842,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -17.032310788669488,
-        "rms_dbfs": -32.98147612158307,
-        "silent": false
-      },
-      "files": {
-        "music/love/harmony.wav": "38f3bbcfae00e94478bbc58946b101986246fb95a4bd9b0fa91dd8fee425b65f",
-        "music/love/melody.wav": "e48fc1c4bb8682b92bdca493ffe7fd804d1792fdb2300cef6f80d72146db70a7",
-        "music/love/preview.wav": "20942a3b506ee9f6ef7dfcdf26c87564f79ed4b4a24e74a264a16eb572e65a1f",
-        "music/love/rhythm.wav": "7ae5a5f3ae37ff7b2ab7c8324a1b232914d472d169608c37e7d26efeb8bb17d8",
-        "music/love/score.json": "865ac1d124de59e8a60120f9ff3caee6ba7af0d782e0ba60720a306c172c4bee"
-      }
-    },
-    "grief": {
-      "id": "grief",
-      "name": "What Remains",
-      "duration": 32.0,
-      "body_seconds": 30.0,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -20.858260491394446,
-        "rms_dbfs": -32.492182527135604,
-        "silent": false
-      },
-      "files": {
-        "music/grief/harmony.wav": "093dc9ba78e8df17d38298160f8a575e983ee8bdefc8a01c81ec5087b8068c89",
-        "music/grief/melody.wav": "7ae6e364d30760e249841124c23703ee3f99326cee63101261b9f7e131397080",
-        "music/grief/preview.wav": "737d5a34312609658d7b71d9352c0d22a2e87d8e70cfae7154764b5c15a7f078",
-        "music/grief/rhythm.wav": "2cd3e90c08a318fb441b9c392178455965e981d927c8b26a5e1f93bb4f76a391",
-        "music/grief/score.json": "24140ae27a2dad5a335b908bd347b1fef83418c51e9edbb8802042213fb4ffa1"
-      }
-    },
-    "hope": {
-      "id": "hope",
-      "name": "First Light",
-      "duration": 23.8181875,
-      "body_seconds": 21.818181818181817,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -17.580097861160674,
-        "rms_dbfs": -32.94469399586153,
-        "silent": false
-      },
-      "files": {
-        "music/hope/harmony.wav": "8a827f43ecbce4307a3cdb1d71fcaf1c5ef9db00d6f6b99c8c6a302e948e406c",
-        "music/hope/melody.wav": "ba7855185b1c8b8ce19004813d053a1320199e040c5178eab105867cac18bd61",
-        "music/hope/preview.wav": "f0824d91d095843d98f8f85d9426d5cefd675ae9eab1c49dbfb0b6926ee21ca2",
-        "music/hope/rhythm.wav": "d352203dd08031a6603a1d9fceb99f47cad06e70b47bb95c8afc1747deccdfc7",
-        "music/hope/score.json": "81a40948b2abfb7ab1f200de312701431675eef3b23d60c20f02a2b243a094b2"
-      }
-    },
-    "wonder": {
-      "id": "wonder",
-      "name": "Beyond The Ridge",
-      "duration": 24.857145833333334,
-      "body_seconds": 22.857142857142858,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -20.355975510832316,
-        "rms_dbfs": -32.694439433954706,
-        "silent": false
-      },
-      "files": {
-        "music/wonder/harmony.wav": "fefbadbbde470c67fe01833dfe3cb4cfeac38b0f318d1f5e4a8a750d202618c1",
-        "music/wonder/melody.wav": "f4b800a571756541881abd08719e514429a2a6ea964ea08255b100d685a10711",
-        "music/wonder/preview.wav": "aa2a1e8690ffa0c8275232ac4d6e8de23d748a3a38284d0961c530279ffb454c",
-        "music/wonder/rhythm.wav": "d4b3f6b1598b77acc1bd15b1d1dea55a3b865ae433c77ee3ab1377d484192fc4",
-        "music/wonder/score.json": "76206418d0f673f8a289c7edf8484224b32a4a013d98a3fa1f176a959a1c6818"
-      }
-    },
-    "journey": {
-      "id": "journey",
-      "name": "The Open Road",
-      "duration": 20.461541666666665,
-      "body_seconds": 18.46153846153846,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -17.927431827449738,
-        "rms_dbfs": -32.68208668817805,
-        "silent": false
-      },
-      "files": {
-        "music/journey/harmony.wav": "d7e8a9aa3c57ba7281f9af1ca494e91a20283426859366367e0b0e8b87dbe549",
-        "music/journey/melody.wav": "f7bb44f367cec77058400a3fc0c4e4c7828a678b0464a54613be9cf2da2a07b0",
-        "music/journey/preview.wav": "e06132c66404392f2f5f2cc12f93d7f16f59ed66797126daba6973e898e23f26",
-        "music/journey/rhythm.wav": "793be7fd07d4170ec49ef15568641886e20af452d63953fb4d912eb2428a4536",
-        "music/journey/score.json": "748253786aaa5defb1fa48b493f8d1602d4a1c8102435e5ed15b980569435991"
-      }
-    },
-    "documentary": {
-      "id": "documentary",
-      "name": "Threads Of History",
-      "duration": 22.0,
-      "body_seconds": 20.0,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -17.14016687816212,
-        "rms_dbfs": -32.751045494694935,
-        "silent": false
-      },
-      "files": {
-        "music/documentary/harmony.wav": "c571ec06994eed72064c1036f9c9e9d98fa61efbf7b90ba029fc4e47ec8cda1a",
-        "music/documentary/melody.wav": "70f5439c15f6ef8e49cdd2eb79bccec68f3ecb0bc3a5c56ad6aeae8937a982a3",
-        "music/documentary/preview.wav": "a64fad075962320741c066673c88e1019357e0147177ff20ef788b296839cf84",
-        "music/documentary/rhythm.wav": "e2e797635338a38bff7b2305c64f30aec8f68a81a6f00075febf6fce9d4a4053",
-        "music/documentary/score.json": "bb867655ba4f08364d0775ad2af6977240eaa63eb2a1a3c1f360b372761e5cad"
-      }
-    },
-    "mystery": {
-      "id": "mystery",
-      "name": "Behind The Door",
-      "duration": 26.0,
-      "body_seconds": 24.0,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -18.84527977134518,
-        "rms_dbfs": -32.237288788640285,
-        "silent": false
-      },
-      "files": {
-        "music/mystery/harmony.wav": "0ed587015bc78a73b239c84c701a196c560fe451ac95a6f182a78852615eb3e5",
-        "music/mystery/melody.wav": "5b99d2cf10a415e8b62d6b8d42312f1ea88377ed684fb6019e2ee6babce8696f",
-        "music/mystery/preview.wav": "9428f8c4f4ba106a0c708e1bbff42ce0049052e3945d0ff510ecc0ac65176e30",
-        "music/mystery/rhythm.wav": "327e7dc3559d1f8fad966c29e52dfc425813223b6db16443389b72b97b9ae46b",
-        "music/mystery/score.json": "1c9664d9b10a5095e19d215fbdb71f84edffd1988aa77923b2fd8da6f9caf420"
-      }
-    },
-    "suspense": {
-      "id": "suspense",
-      "name": "Before The Signal",
-      "duration": 19.142854166666666,
-      "body_seconds": 17.142857142857142,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -17.438979396036018,
-        "rms_dbfs": -31.772165849553623,
-        "silent": false
-      },
-      "files": {
-        "music/suspense/harmony.wav": "bd785de9a8f5e9279b6729385b6094e4213f6d42b7029d5663378fbfdcf149aa",
-        "music/suspense/melody.wav": "16d149a28b7d12527abba8bac8ced952243db90c9bc26e83f9c23fc15b7f418b",
-        "music/suspense/preview.wav": "d4097ef8ad5aaeee72dff77a0e1efc1a475d37107602bfaff44c85b4e05279fe",
-        "music/suspense/rhythm.wav": "9c28f2645ed9e539894b50512076bde4b0f287d4ebd5ca1da668276dfe27f9f0",
-        "music/suspense/score.json": "d9ae0e695c605327f9d358f5788b1986636a59900924451c99b391cfc63a98cc"
-      }
-    },
-    "dread": {
-      "id": "dread",
-      "name": "The Empty Square",
-      "duration": 30.235291666666665,
-      "body_seconds": 28.235294117647058,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -21.997624700393903,
-        "rms_dbfs": -33.58615324258923,
-        "silent": false
-      },
-      "files": {
-        "music/dread/harmony.wav": "b99d60711bce31206413b877a5e5e004e66ff4cebd52928dda47c6ee5f1bb8ea",
-        "music/dread/melody.wav": "715ba50a68bc90958e3b5127511f59f0bb7dd8c9f31243095878e2114e856e47",
-        "music/dread/preview.wav": "dc2c3ee30a8896c6d4f70a0aeed3658b02db80465c1c936a25f8512b54fa2180",
-        "music/dread/rhythm.wav": "3510e29691f6a04179d8225b8e11c67757856204b70dde56abe28e5c24d1cace",
-        "music/dread/score.json": "132c04d3b004188393dd56759cbe1e12c2f9aa6d9390cd4497954f43bcbd9ee9"
-      }
-    },
-    "battle": {
-      "id": "battle",
-      "name": "Hold The Entrance",
-      "duration": 18.0,
-      "body_seconds": 16.0,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -17.219925093506657,
-        "rms_dbfs": -31.717317699458697,
-        "silent": false
-      },
-      "files": {
-        "music/battle/harmony.wav": "dab28b88d49644bd2d1a2d0aa376f236d9073a89f63088125019ec88d63e44e7",
-        "music/battle/melody.wav": "59abd83b9a5c4d39d3bcd71c7081b2667e6c2dcf6b9a1c6f29b933bacd0f32b5",
-        "music/battle/preview.wav": "02d19f339da27efd1a05a2ffa20c994f95de7512f0d84115a07331dae3bd1c43",
-        "music/battle/rhythm.wav": "d330451351835e7dc8558cb8f9b7cc14c5af09542cc7a3305c8d9f8cacf708f5",
-        "music/battle/score.json": "273e9030fce2e2cc955191e2185120cd22239db524fe9d47a886d4d7de2185a7"
-      }
-    },
-    "resolve": {
-      "id": "resolve",
-      "name": "Home Again",
-      "duration": 26.0,
-      "body_seconds": 24.0,
-      "source": "original Python composition",
-      "review": "pending",
-      "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
-      "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
-      "measurements": {
-        "peak_dbfs": -19.280191738353526,
-        "rms_dbfs": -32.346378631597645,
-        "silent": false
-      },
-      "files": {
-        "music/resolve/harmony.wav": "3aac963d33c0663797cb5f3267398d483f3a2a39e6292f0c9f79143132925d9a",
-        "music/resolve/melody.wav": "69f9f53ddc95774f9d011678046bac1d8bd5fe9c13b84c10943201f44e531443",
-        "music/resolve/preview.wav": "b9ef5fb639d6ea4b7e8b6991b84ff930d81b94e49b88273b51a5637c11813fb2",
-        "music/resolve/rhythm.wav": "6d5166d493a7edd4dce9b8e2237ff5de16a8cb5e7d8bff1400ac5aeaa50638ca",
-        "music/resolve/score.json": "cae90c578584ad49ded7df6dfd880ed9031b6e6c5fac874e292f0c7f512321e6"
-      }
-    }
+ "schema": "sumi-local-sound-bank-v1",
+ "music": {
+  "tender": {
+   "id": "tender",
+   "name": "Tender Connection",
+   "duration": 28.666666666666668,
+   "body_seconds": 26.666666666666668,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -19.883960895096727,
+    "rms_dbfs": -32.40841661122997,
+    "silent": false
+   },
+   "files": {
+    "music/tender/harmony.flac": "651cf074f264def2ae11ea1d18eee32e3636ed128e2b95f9933ecf5992bdb1cd",
+    "music/tender/melody.flac": "0b97fcf3ada86faec2a84626312aa6069dbf64c418567e5d75591838fc671135",
+    "music/tender/preview.flac": "40a359e6dda179251e048cd82aa02ce5e9ec74fb61f5c79d2faa45f6886a0b29",
+    "music/tender/score.json": "0dfcfbc739c432620ee51c893d2263f6e3c04991a26fe872439ad6fc7ba9ddcb"
+   },
+   "empty_parts": [
+    "rhythm"
+   ]
   },
-  "sfx": {},
-  "sensory_review": "pending",
-  "provenance": "12 original Python music themes. Effect cache is separate; library-first routing synthesizes missing cues with Python. No provider recordings bundled."
+  "love": {
+   "id": "love",
+   "name": "A Quiet Promise",
+   "duration": 27.263166666666667,
+   "body_seconds": 25.263157894736842,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -17.032310788669488,
+    "rms_dbfs": -32.98147612158307,
+    "silent": false
+   },
+   "files": {
+    "music/love/harmony.flac": "e1aacc1235bb2579f5c8b687d8b97fe501cf1e8e0d39b68b3b20467ff226cf42",
+    "music/love/melody.flac": "414e247b953e350f94d0a75cc104eb3e7f0d7639ab01418ce3bd1396f2e7e530",
+    "music/love/preview.flac": "08d33cd076b8089b9e2bad612ced1b0dba9de3285f9370b949456b7147f0e782",
+    "music/love/rhythm.flac": "c23f4cfc4a1091dcf0b885ba46bddb85ff166cb8319aac67228c6100cf3fe7c6",
+    "music/love/score.json": "865ac1d124de59e8a60120f9ff3caee6ba7af0d782e0ba60720a306c172c4bee"
+   }
+  },
+  "grief": {
+   "id": "grief",
+   "name": "What Remains",
+   "duration": 32.0,
+   "body_seconds": 30.0,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -20.858260491394446,
+    "rms_dbfs": -32.492182527135604,
+    "silent": false
+   },
+   "files": {
+    "music/grief/harmony.flac": "5c0ded8dc460b0a69ee8da46752f93c621016db5250a2f95e6d365ba90d88e86",
+    "music/grief/melody.flac": "cdc64250f30a1f2691742e684a7a66b1ae0495d481dee16d443a26696f2eaa57",
+    "music/grief/preview.flac": "f577342238a3baee195d2c5b7e14c3844602f9133df3149c26779c8d28886329",
+    "music/grief/score.json": "24140ae27a2dad5a335b908bd347b1fef83418c51e9edbb8802042213fb4ffa1"
+   },
+   "empty_parts": [
+    "rhythm"
+   ]
+  },
+  "hope": {
+   "id": "hope",
+   "name": "First Light",
+   "duration": 23.8181875,
+   "body_seconds": 21.818181818181817,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -17.580097861160674,
+    "rms_dbfs": -32.94469399586153,
+    "silent": false
+   },
+   "files": {
+    "music/hope/harmony.flac": "13cc710098fff435552e897aec39e7dd707526fa4d3cd093cba3b74763e83c0e",
+    "music/hope/melody.flac": "9e015d68f9cb42ae70bff7a05aaa14c9d26b2352b6fddd775f0f6b9d522bcbe1",
+    "music/hope/preview.flac": "a2c18ebcb447faf54c1331402e6cd1054e7e1e2aa3d4a0eb8b96e9ec11f68bd8",
+    "music/hope/rhythm.flac": "47753263a2d70ec092fd47043683348249dd7ca866b62c562329276872111301",
+    "music/hope/score.json": "81a40948b2abfb7ab1f200de312701431675eef3b23d60c20f02a2b243a094b2"
+   }
+  },
+  "wonder": {
+   "id": "wonder",
+   "name": "Beyond The Ridge",
+   "duration": 24.857145833333334,
+   "body_seconds": 22.857142857142858,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -20.355975510832316,
+    "rms_dbfs": -32.694439433954706,
+    "silent": false
+   },
+   "files": {
+    "music/wonder/harmony.flac": "0875add2b8ff01d06cfca6559a2e1c3bb2f80ac81cb397922a2d022b661bfb8a",
+    "music/wonder/melody.flac": "7d916dd2c85d02cc27bbea6271bdcdd1b391d03b46485a387cb51fdaa7cf7942",
+    "music/wonder/preview.flac": "936711db569db4923c3a8fa1381b3ccf4d3df1e74c1ba25e280a8233bdca0363",
+    "music/wonder/score.json": "76206418d0f673f8a289c7edf8484224b32a4a013d98a3fa1f176a959a1c6818"
+   },
+   "empty_parts": [
+    "rhythm"
+   ]
+  },
+  "journey": {
+   "id": "journey",
+   "name": "The Open Road",
+   "duration": 20.461541666666665,
+   "body_seconds": 18.46153846153846,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -17.927431827449738,
+    "rms_dbfs": -32.68208668817805,
+    "silent": false
+   },
+   "files": {
+    "music/journey/harmony.flac": "358b240f1011fc804b717e2db74ae0785c3d7bb919a959e00aebacf602fbeb58",
+    "music/journey/melody.flac": "7417f8477c71d5b946e16af0cdb480b47541534917a1666cf1a34d8f44156468",
+    "music/journey/preview.flac": "471a1fb5a0180f14746764bae1a60d0eed1d812ea9cd1f85b9be67b049c96c2e",
+    "music/journey/rhythm.flac": "d0ed9bc0759f9499ef9f32e6f93bd5b2c985a459057c74458e5f9a92a52e659f",
+    "music/journey/score.json": "748253786aaa5defb1fa48b493f8d1602d4a1c8102435e5ed15b980569435991"
+   }
+  },
+  "documentary": {
+   "id": "documentary",
+   "name": "Threads Of History",
+   "duration": 22.0,
+   "body_seconds": 20.0,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -17.14016687816212,
+    "rms_dbfs": -32.751045494694935,
+    "silent": false
+   },
+   "files": {
+    "music/documentary/harmony.flac": "be6b96eb076f3521c6a2d4f51ec430eca1b1bc52ca3b1ea277c949fd3421cc5e",
+    "music/documentary/melody.flac": "decef9d3c05f8cd20aba71c5e73fda949d784fb6a551c637e4cd1288320b90f0",
+    "music/documentary/preview.flac": "e850354df372ea584d650b901b7815b1e4253010fbf63e5a2d6c128f31203643",
+    "music/documentary/rhythm.flac": "3d04205a7346dc764f6f14c68f2c5b06a499d72132f7ae2a554caf3438675eac",
+    "music/documentary/score.json": "bb867655ba4f08364d0775ad2af6977240eaa63eb2a1a3c1f360b372761e5cad"
+   }
+  },
+  "mystery": {
+   "id": "mystery",
+   "name": "Behind The Door",
+   "duration": 26.0,
+   "body_seconds": 24.0,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -18.84527977134518,
+    "rms_dbfs": -32.237288788640285,
+    "silent": false
+   },
+   "files": {
+    "music/mystery/harmony.flac": "82dfab31b6bf73e84ec05dd828a1323e3e51ffbd0af1522d790c2551cbe14e66",
+    "music/mystery/melody.flac": "8f36556d91841ce312d8be60650276088e2e533be32e53c1454e203e77958126",
+    "music/mystery/preview.flac": "259b32fda6f255d9821b9c6dc51e7be10bc773f6195f98d0f6390cd3b658c58b",
+    "music/mystery/rhythm.flac": "db98d7a48b6c910e4b5ce3c8a5ffa6fb3347aa2705ffc9aea1c9db53a6234782",
+    "music/mystery/score.json": "1c9664d9b10a5095e19d215fbdb71f84edffd1988aa77923b2fd8da6f9caf420"
+   }
+  },
+  "suspense": {
+   "id": "suspense",
+   "name": "Before The Signal",
+   "duration": 19.142854166666666,
+   "body_seconds": 17.142857142857142,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -17.438979396036018,
+    "rms_dbfs": -31.772165849553623,
+    "silent": false
+   },
+   "files": {
+    "music/suspense/harmony.flac": "887028852ad82612a80bb5954409bb9d8ae2e83906f30ef69e70358586a16c6e",
+    "music/suspense/melody.flac": "661e84caf5be25b1f3f421de53664fa7e2b8effc1e83f1a2f1b1ce28cd0c3653",
+    "music/suspense/preview.flac": "bd4ea03dc9b75d2853b4ca6cfd4f4039c318fdf39c2710bc83df2652d9283ff3",
+    "music/suspense/rhythm.flac": "7de55a5291bd0c3ecf3b100978dbc6a54910d93d3b05e46c617963d690bd2949",
+    "music/suspense/score.json": "d9ae0e695c605327f9d358f5788b1986636a59900924451c99b391cfc63a98cc"
+   }
+  },
+  "dread": {
+   "id": "dread",
+   "name": "The Empty Square",
+   "duration": 30.235291666666665,
+   "body_seconds": 28.235294117647058,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -21.997624700393903,
+    "rms_dbfs": -33.58615324258923,
+    "silent": false
+   },
+   "files": {
+    "music/dread/harmony.flac": "028154f59cc29e2262ee372731a661f810945339d4f2efb09c6c4d70c2e4c0d8",
+    "music/dread/melody.flac": "07cfa1a4e498c2f3f1efa81a329937977a9f799772d7063caedccb7cb5a6ed6a",
+    "music/dread/preview.flac": "f91a2b4b32027a401a9017638a7ed2fb8dd12542e0fa81d3b6dff9367f9af51c",
+    "music/dread/score.json": "132c04d3b004188393dd56759cbe1e12c2f9aa6d9390cd4497954f43bcbd9ee9"
+   },
+   "empty_parts": [
+    "rhythm"
+   ]
+  },
+  "battle": {
+   "id": "battle",
+   "name": "Hold The Entrance",
+   "duration": 18.0,
+   "body_seconds": 16.0,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -17.219925093506657,
+    "rms_dbfs": -31.717317699458697,
+    "silent": false
+   },
+   "files": {
+    "music/battle/harmony.flac": "6972a6c852bf61df53363fc005df57d4dd2bd0fd889f70c990342ac4b42721ab",
+    "music/battle/melody.flac": "d85f24a9e09115a641548cb60262e78ed36ecba3f92addd5cf674672beda9a57",
+    "music/battle/preview.flac": "28d1b1165b6bc7006894595f34925a2861ef6b633f1d54042fa7c8021d1dec62",
+    "music/battle/rhythm.flac": "d52be4ee528bea152ac366a4043102ff0987238849807ca254ac4cc8ac2c9e34",
+    "music/battle/score.json": "273e9030fce2e2cc955191e2185120cd22239db524fe9d47a886d4d7de2185a7"
+   }
+  },
+  "resolve": {
+   "id": "resolve",
+   "name": "Home Again",
+   "duration": 26.0,
+   "body_seconds": 24.0,
+   "source": "original Python composition",
+   "review": "pending",
+   "source_hash": "3140b99fbc1703662013a4484c316d0c298b54cc25900f658b8078452e1718ee",
+   "catalog_sha256": "829dbc077e38ffe2bdb59128979b1efe88ab0fc647bccbdc2e7b8631b010efc4",
+   "measurements": {
+    "peak_dbfs": -19.280191738353526,
+    "rms_dbfs": -32.346378631597645,
+    "silent": false
+   },
+   "files": {
+    "music/resolve/harmony.flac": "b0f196280f55616d795cceb94c37246c2bada57db0360de487a1393c174c1750",
+    "music/resolve/melody.flac": "3063bf80fb860a778829d20aea0def5ee624ec91b74a00f739dc170c7fa3140a",
+    "music/resolve/preview.flac": "df7ee7fa4953d054276d06003732cc41a50543b7b471972f383c216841689555",
+    "music/resolve/rhythm.flac": "cc21773e64b1dc4cc0b2d4eb2f5e7ef9bb6a68843bf0148cf3a9523d0d1da261",
+    "music/resolve/score.json": "cae90c578584ad49ded7df6dfd880ed9031b6e6c5fac874e292f0c7f512321e6"
+   }
+  }
+ },
+ "sfx": {},
+ "sensory_review": "pending",
+ "provenance": "12 original music themes. No effects or provider recordings are bundled."
 }

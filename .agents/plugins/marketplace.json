@@ -1,0 +1,20 @@
+{
+  "name": "beyondsumi",
+  "interface": {
+    "displayName": "Beyondsumi"
+  },
+  "plugins": [
+    {
+      "name": "beyondsumi",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Creativity"
+    }
+  ]
+}

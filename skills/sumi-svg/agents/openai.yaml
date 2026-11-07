@@ -1,5 +1,0 @@
-interface:
-  display_name: "Beyondsumi · SVG"
-  short_description: "Original SVG art for Sumi films"
-  default_prompt: "Use $sumi-svg to guide this task step by step, reuse available tools and explain any missing setup before installation."
-  brand_color: "#A93A2A"

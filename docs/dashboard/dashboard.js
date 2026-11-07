@@ -5,7 +5,7 @@
   if (!data || !Array.isArray(data.films) || !data.films.length) {
     $("title").textContent = "Your film room is ready.";
     $("subtitle").textContent =
-      "Ask your agent to create a Sumi Original, Light or Dark film. Your finished videos will appear here.";
+      "Ask your agent to create a Sumi Dark, Light or Vector film. Your finished videos will appear here.";
     $("edition").textContent = "NO FILM YET";
     document.querySelector(".screening").hidden = true;
     document.querySelector(".editions").hidden = true;
@@ -14,7 +14,8 @@
   const safe = (p) => {
     if (typeof p !== "string") return null;
     if (/^media\/[a-zA-Z0-9_.-]+$/.test(p)) return p;
-    return /^https:\/\/github\.com\/beyondtahir\/beyondsumi\/releases\/download\/v1\.0\.0\/beyondsumi-(original|light|dark|svg)\.mp4$/.test(
+    if (/^\.\.\/assets\/posters\/[a-z0-9_-]+\.jpg$/.test(p)) return p;
+    return /^https:\/\/github\.com\/beyondtahir\/beyondsumi\/releases\/download\/v2\.0\.0\/beyondsumi-(light|dark|vector)\.mp4$/.test(
       p,
     )
       ? p
@@ -133,7 +134,7 @@
   });
   const catalogue = (
     data.catalogue ||
-    ["Sumi Original", "Sumi Light", "Sumi Dark"].map((name) => ({
+    ["Sumi Dark", "Sumi Light", "Sumi Vector"].map((name) => ({
       name,
       description: "Available to create in this edition.",
     }))

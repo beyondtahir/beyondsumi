@@ -1,16 +1,21 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "sumi",
-  "version": "1.0.1",
-  "description": "Guided Sumi films with image-first artwork, optional SVG, character dialogue, local sound and branded HD delivery.",
+  "name": "beyondsumi",
+  "version": "2.0.0",
+  "description": "A frame-by-frame Sumi animation studio: writer, director, artist, animator, sound and checker, in Sumi Dark, Sumi Light and Sumi Vector.",
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Beyondsumi",
-        "shortDescription": "Guided ink animation studio",
-        "longDescription": "Write and approve the story and direction, prepare complete character references, then create Sumi Original, Sumi Light or Sumi Dark. Japanese Sumi identity throughout, with local sound and review. Earlier movement methods remain historical techniques.",
+        "shortDescription": "Frame-by-frame Sumi animation studio",
+        "longDescription": "Take a story through a writer, director, artist, animator, sound designer and checker. Every movement is a separate drawing, in Sumi Dark brush, Sumi Light colour pencil or Sumi Vector, drawn in code with no images.",
         "capabilities": [],
-        "defaultPrompt": "Use Sumi to help me create an original animated story. Guide setup if this is my first use, then recommend a style and present the direction and duration for approval."
+        "defaultPrompt": [
+          "Set up Beyondsumi and guide me step by step.",
+          "Help me turn my idea into a 30-second Sumi film. Ask me what you need.",
+          "Check what this computer can do, and show me what each Sumi style looks like."
+        ],
+        "developerName": "Beyond Tahir"
       }
     }
   }
