@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sumi Sound"
+  short_description: "Narration, music and effects"
+  default_prompt: "Use $sumi-sound to plan the sound for my film."
+  brand_color: "#A93A2A"

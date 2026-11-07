@@ -1,17 +1,25 @@
-# First installation and first actual use
+# First-time helper
 
-For a complete beginner, use [the simple usage guide](beginner-use.md); installation help is in the selected [host guide](install/shared.md). Give one action at a time, explain what success looks like, and help recover from errors. Do not overwhelm the user with every provider or technical option.
+This helper guides anyone new to Beyondsumi, from installation to their first film, in any assistant. A ZIP or plugin cannot run by itself, so run this in the chat the first time the user asks for Sumi, even if they go straight to asking for a film. Show the welcome and the six steps in the chat first, then continue with what they asked.
 
-This is the single setup conversation. Read external [memory](memory.md); preserve it across upgrades. A passive ZIP cannot run itself on every agent. The CLI installer can check requirements immediately; a host without an install hook does this on first invocation. Mark the welcome shown only after displaying it.
+Read [memory](memory.md) first with `python3 scripts/first_run.py`. If `welcome_needed` is false, do not repeat this tour. Reuse saved choices, recheck only the tools this film needs, and go to step 8.
 
-1. Show the short `assets/WELCOME.txt` in the user's language. Explain that Beyondsumi helps write, direct, animate, caption and score a story, with script/direction approval before production.
-2. Run `scripts/first_run.py` read-only. Inspect actual callable image/MCP tools in the host; Python cannot discover hidden assistant capabilities. Report available/missing/unknown, purpose, free/paid status and one next action. Failed detection is unknown, not proof of absence.
-3. Use the short style descriptions returned by the catalogue. Original: painted Japanese stories with richer character acting; Light: colourful romance, children's/general stories and documentaries; Dark: horror/mystery with dramatic ink, red and camera. Respect any existing selection.
-4. Ask which actual available image tool/model to use, or reuse an explicit saved choice after checking availability. A chat model name alone proves nothing. Images are first choice; SVG is explicitly selected or offered when images are unavailable. Offer connected image MCP/API, supplied artwork or another capable host before a disclosed SVG fallback. Follow [image routing](image-capabilities.md).
-5. Ask: **Would you like one comparison image of the same scene in all three styles, or shall we proceed?** If requested, make one triptych using the chosen image tool or SVG route; disclose known cost before a paid call. This also serves as the tool/art proof. Do not create an additional duplicate sample or three separate images by default. The existing `assets/style-atlas-three.svg` may be offered as an already-made illustration, labelled accurately, not claimed as a fresh model test.
-6. Ask **Use the Sumi sound library, or create fresh sound with our Python engine?** unless chosen already. [Sound routing](sound-routing.md) owns priority and paid-effect approval. Explain that sound remains available with every narration choice and either image/SVG art.
-7. Offer **ElevenLabs / Voicebox / record your voice and send it**, plus **no narration**. Load only the selected companion's setup guide. Check existing connection/app/model before offering another installation. Supplied recording needs no voice model. Narration later reopens these same options without repeating completed setup. Personal/consented voices can support identity; monetization is not guaranteed by voice choice.
-8. For missing third-party items, explain exact selected software/model, official source, purpose, free/paid status, estimated download/storage and installation location. Batch related permission requests; install only the authorized scope and verify it. First generation can download a Voicebox model, so resolve that before generating. Optional setup never blocks writing the story.
-9. Save explicit non-secret reusable preferences, including image route/tool/model, narration route and sound choice. Credentials go to secure provider/OS storage. Mark first_run after the actual welcome, then continue with [new-project intake](new-project-intake.md).
+## How to help
 
-Keep this interactive and short; do not dump every provider's model table or advanced animation settings. The selected route controls the next detail. Do not start a film, paid sample or download merely because setup was invoked.
+- Give one action at a time, and say what success looks like.
+- When something fails, explain it in plain words and help fix it. See [when something does not work](install/shared.md#when-something-does-not-work).
+- Do not start a film, a paid sample or a download just because setup was run.
+- Never ask for a key in chat.
+
+## The steps
+
+1. Show `assets/WELCOME.txt` in the user's language. Then mark it: `python3 scripts/sumi_memory.py mark first_run --version 2.0.0`. If the app does not allow saving there, carry on, and use a folder in the project: `python3 scripts/sumi_memory.py --state-dir FOLDER mark first_run --version 2.0.0`.
+2. Run `python3 scripts/first_run.py`. It only reads and reports. Then check what image tools this assistant really has, because Python cannot see them. Run `node tools/browser-check.mjs` too, because a browser can be installed and still be blocked. Report what is available, missing or unknown, in plain words. A failed check means unknown, not missing.
+3. For anything missing, explain what it is for, whether it is free, its official source, its download size and where it will go. Group related requests, install only with the user's permission, and confirm it works. Reuse what is already installed. Missing tools never stop the user writing a story. If the browser is blocked in Codex, explain that drawing and checking the film need it, and ask the user to give this project Full access. See [setup](setup.md).
+4. Settle the image route. See [image routes](../../sumi-artist/references/image-routes.md). In ChatGPT or Codex, use the best image model the app has. In Claude, or anywhere with no image model, ask the user to give access to a third-party image tool for Dark and Light, or to animate in code with [Sumi Vector](../../sumi-vector/SKILL.md), which needs no images. Be honest that Vector has simpler faces.
+5. Offer one sample image in the style the user wants, or one image comparing the styles. Say what it costs first if it is paid.
+6. Ask about narration in this order: **Voicebox, ElevenLabs, the user's own recording, or no narration**. Every film has library music and sound effects. Load only the chosen guide. Details are in [Sound](../../sumi-sound/SKILL.md).
+7. Save only choices the user wants remembered, in [memory](memory.md). Never save keys there.
+8. Ask only what is still missing: the story, language, length and screen shape. Then create the project and start with the [Writer](../../sumi-writer/SKILL.md).
+
+For a complete beginner, use [the simple guide](beginner-use.md).

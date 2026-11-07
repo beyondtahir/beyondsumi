@@ -13,7 +13,7 @@ python3 scripts/sumi_memory.py show
 python3 scripts/sumi_memory.py set narration_provider voicebox --reason 'User chose local narration as their default'
 python3 scripts/sumi_memory.py set narration_model kokoro --reason 'User selected this installed model'
 python3 scripts/sumi_memory.py forget narration_model
-python3 scripts/sumi_memory.py mark first_run --version 4.5.4
+python3 scripts/sumi_memory.py mark first_run --version 2.0.0
 ```
 
 Memory contains preferences, reasons and timestamps, not API keys, passwords, raw voice samples, provider responses or whole conversations. Keys belong in an existing connector, OS credential store or protected environment, never JSON, README, project source or a ZIP. Tell the user what defaults were saved and how to change them: “remember …”, “show my Sumi preferences”, “forget …”, “show setup again”. Scope defaults to the signed-in/local person; do not share one person's memory with another user or ship it in the reusable package.
@@ -22,9 +22,7 @@ No API spending, software downloads, publishing, runtime extensions or future ap
 
 ## Project memory
 
-Every film has `SUMI-PROJECT.md` plus `DIRECTION-PLAN.md`, generated from the bundled templates by the project initializer. Existing projects keep their own equivalent records. Store brief, complete story/beat ledger, narration text and take path, chosen style/route, scene/camera/edit decisions, target and measured duration, exact approval revision, asset origins, models/settings, generation receipts, proofs, defects, review limits and next action. Link files relative to the project where possible. Preserve prior approved revisions.
-
-For the dedicated Sumi development workspace, `SUMI-MASTER.md` and `sumi-library/CURRENT-STATE.md` remain the long-term project memory, with links to preserved evidence. Never include that owner's private archive or personal decisions in a generic distribution.
+Every film has `STUDIO.md` and `shots.json`, made by `sumi-plan.mjs new`. Existing projects keep their own equivalent records. Store brief, complete story/beat ledger, narration text and take path, chosen style/route, scene/camera/edit decisions, target and measured duration, exact approval revision, asset origins, models/settings, generation receipts, proofs, defects, review limits and next action. Link files relative to the project where possible. Preserve prior approved revisions.
 
 On resume, read project memory before producing anything. If it is missing or incomplete, reconstruct only from evidence, label unknowns and ask when a required choice has not been made. Do not mark a plan approved or a film reviewed because an earlier unrelated draft was approved.
 

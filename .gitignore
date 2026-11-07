@@ -1,5 +1,5 @@
 # Local preview-only demo links; finished demos are public release assets.
-docs/demo-media/
+docs/demo-media
 .env
 .env.*
 !.env.example
@@ -11,3 +11,4 @@ work/
 outputs/
 *.log
 docs/dashboard/media/*.mp4
+docs/_readme_preview.html

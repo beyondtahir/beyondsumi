@@ -5,7 +5,7 @@
   if (!data || !Array.isArray(data.films) || !data.films.length) {
     $("title").textContent = "Your film room is ready.";
     $("subtitle").textContent =
-      "Ask your agent to create a Sumi Original, Light or Dark film. Your finished videos will appear here.";
+      "Ask your agent to create a Sumi Dark, Light or Vector film. Your finished videos will appear here.";
     $("edition").textContent = "NO FILM YET";
     document.querySelector(".screening").hidden = true;
     document.querySelector(".editions").hidden = true;
@@ -120,7 +120,7 @@
   });
   const catalogue = (
     data.catalogue ||
-    ["Sumi Original", "Sumi Light", "Sumi Dark"].map((name) => ({
+    ["Sumi Dark", "Sumi Light", "Sumi Vector"].map((name) => ({
       name,
       description: "Available to create in this edition.",
     }))

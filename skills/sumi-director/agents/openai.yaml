@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sumi Director"
+  short_description: "Plan scenes, camera and drawings"
+  default_prompt: "Use $sumi-director to direct my approved script into a shot plan."
+  brand_color: "#A93A2A"

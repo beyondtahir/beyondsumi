@@ -1,6 +1,6 @@
 interface:
   display_name: "Beyondsumi"
-  short_description: "Sumi Original, Light and Dark"
-  default_prompt: "Use $sumi to guide me from my story idea through style selection, an approved directing plan, animation, sound and final review; check first-time setup if needed."
+  short_description: "Frame-by-frame Sumi animation studio"
+  default_prompt: "Use $sumi to take my story through the studio: writer, director, artist, animator, sound and checker. Check first-time setup if needed."
   brand_color: "#A93A2A"
   icon_small: "./assets/delivery-dashboard/logo.png"

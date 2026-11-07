@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sumi Animator"
+  short_description: "Animate frame by frame"
+  default_prompt: "Use $sumi-animator to animate my approved shots frame by frame."
+  brand_color: "#A93A2A"

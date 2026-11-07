@@ -21,6 +21,7 @@ import uuid
 
 VERSION = '1.1.1'
 API = 'https://api.elevenlabs.io'
+# Kept unchanged, so a key already saved in Keychain keeps working.
 SERVICE = 'com.codex.personal.elevenlabs-voice'
 ACCOUNT = 'elevenlabs-api-key'
 MAX_TEXT = 5000
@@ -59,7 +60,7 @@ def store_key(key):
     if not re.fullmatch(r'[A-Za-z0-9_-]{16,256}', key):
         raise PluginError('Enter the API key alone, without spaces or a Bearer prefix.', 'invalid_key_format')
     # The secret enters security over stdin, never in process arguments or files.
-    command = ('add-generic-password -U -s %s -a %s -l "Codex ElevenLabs API key" '
+    command = ('add-generic-password -U -s %s -a %s -l "ElevenLabs API key" '
                '-T /usr/bin/security -w %s\n' % (SERVICE, ACCOUNT, key))
     subprocess.run(['/usr/bin/security', '-i'], input=command,
                    capture_output=True, text=True, timeout=30)
@@ -79,7 +80,7 @@ def api_request(endpoint, payload=None, key=None, timeout=120):
     request = urllib.request.Request(API + endpoint,
         data=None if payload is None else json.dumps(payload, ensure_ascii=False).encode('utf-8'),
         headers={'xi-api-key': key, 'Accept': 'application/json', 'Content-Type': 'application/json',
-                 'User-Agent': 'Codex-ElevenLabs-Voice/' + VERSION},
+                 'User-Agent': 'Beyondsumi-ElevenLabs-Voice/' + VERSION},
         method='GET' if payload is None else 'POST')
     try:
         with urllib.request.build_opener(NoRedirect()).open(request, timeout=timeout) as response:
@@ -133,7 +134,7 @@ def ask_key(gui):
         if sys.platform != 'darwin':
             raise PluginError('The private GUI prompt requires macOS. Run setup in your terminal instead.')
         script = '''try
-set answer to display dialog "Paste your ElevenLabs API key. It will be verified with ElevenLabs and saved in macOS Keychain. Enable Voices: Read and Text to Speech: Access on this key. It will not appear in chat or plugin files." default answer "" with hidden answer buttons {"Cancel", "Connect"} default button "Connect" with title "Connect ElevenLabs Voice to Codex"
+set answer to display dialog "Paste your ElevenLabs API key. It will be verified with ElevenLabs and saved in macOS Keychain. Enable Voices: Read and Text to Speech: Access on this key. It will not appear in chat or plugin files." default answer "" with hidden answer buttons {"Cancel", "Connect"} default button "Connect" with title "Connect ElevenLabs Voice"
 return text returned of answer
 on error number -128
 return ""
@@ -154,7 +155,7 @@ def connection_status(verify=False):
         result['verified'] = True
         result['verification'] = 'Voice-list access verified. Text-to-speech access is verified only by a successful generation.'
     if not key:
-        result['next_step'] = 'Run Connect ElevenLabs.command or scripts/elevenlabs_plugin.py setup --gui.'
+        result['next_step'] = 'Run python3 scripts/elevenlabs_voice.py setup --gui, or set ELEVENLABS_API_KEY.'
     return result
 
 

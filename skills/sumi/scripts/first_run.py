@@ -7,6 +7,12 @@ from sumi_catalog import STYLES
 from sumi_memory import default_dir,read
 
 
+def needs_welcome(mark):
+    # Someone from version 1 has a new studio to meet, so they see the welcome again.
+    if not mark:return True
+    version=str(mark.get('version','') if isinstance(mark,dict) else '')
+    return version.split('.')[0]=='1'
+
 def inspect(capabilities=None,state_dir=None):
     root=Path(__file__).resolve().parents[1]
     result=doctor();memory=read((state_dir or default_dir())/'user.json')
@@ -18,13 +24,13 @@ def inspect(capabilities=None,state_dir=None):
         image={'status':status,'evidence':evidence[:300],'source':'explicit host attestation, not a generation test'}
     bank=root/'assets/sound-library/bundled-bank/library.json'
     data=json.loads(bank.read_text()) if bank.exists() else {}
-    result.update(welcome_text=(root/'assets/WELCOME.txt').read_text(),welcome_needed=not bool(memory['onboarding'].get('first_run')),image_generation=image,
-        packaged_sound_bank={'music_themes':len(data.get('music',{})),'effects':len(data.get('sfx',{})),'status':'bundled_not_audition_certified' if data else 'missing','default':'original Python synthesis; no sound API/model'},
+    result.update(welcome_text=(root/'assets/WELCOME.txt').read_text(),welcome_needed=needs_welcome(memory['onboarding'].get('first_run')),image_generation=image,
+        packaged_sound_bank={'music_themes':len(data.get('music',{})),'effects':len(data.get('sfx',{})),'status':'bundled_not_audition_certified' if data else 'missing','default':'bundled music; effects from ElevenLabs or supplied files'},
         style_choices=[{'id':key,'name':value['name'],'description':value['short_description']} for key,value in STYLES.items()],
-        saved_choices={key:value['value'] for key,value in memory['preferences'].items() if key in {'image_route','image_tool','image_model','narration_provider','audio_mode','preferred_style'} and isinstance(value,dict) and 'value' in value},
-        comparison_image={'optional':True,'generation_started':False,'format':'one scene, one image, three style panels'},
-        narration_choices=['elevenlabs','voicebox','supplied','none'],automatic_installs=False,paid_generation_started=False,
-        next_step='Show welcome and available/missing/unknown requirements in plain language; ask only missing choices; offer optional one-image three-style comparison, then chosen art/narration route. Mark first_run only after welcome is actually shown.')
+        saved_choices={key:value['value'] for key,value in memory['preferences'].items() if key in {'image_route','image_tool','image_model','narration_provider','audio_mode','preferred_style'} and isinstance(value,dict) and 'value' in value and (key!='preferred_style' or value['value'] in STYLES)},
+        first_sample={"optional":True,"generation_started":False,"format":"one image in the chosen style"},
+        narration_choices=['voicebox','elevenlabs','own_recording','none'],free_effects=['wind','rain','water','fire','whoosh','thud','knock','step'],no_narration_music=['library','supplied'],automatic_installs=False,paid_generation_started=False,
+        next_step='Show the welcome and what is available, missing or unknown in plain words. Ask only missing choices. Offer one sample image, then start with the Writer. Mark first_run only after the welcome is really shown.')
     return result
 
 

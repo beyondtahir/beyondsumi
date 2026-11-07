@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sumi Checker"
+  short_description: "Test the real animation"
+  default_prompt: "Use $sumi-checker to check whether my film has the drawings it promises."
+  brand_color: "#A93A2A"

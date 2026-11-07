@@ -1,0 +1,41 @@
+{
+  "name": "beyondsumi",
+  "version": "2.0.0",
+  "description": "A frame-by-frame Sumi animation studio that guides beginners through every film: writer, director, artist, animator, sound and checker, in Sumi Dark, Sumi Light and Sumi Vector.",
+  "author": {
+    "name": "Beyond Tahir",
+    "url": "https://github.com/beyondtahir"
+  },
+  "homepage": "https://beyondtahir.github.io/beyondsumi/",
+  "repository": "https://github.com/beyondtahir/beyondsumi",
+  "license": "MIT",
+  "keywords": [
+    "animation",
+    "sumi",
+    "anime",
+    "storytelling",
+    "video",
+    "frame-by-frame"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Beyondsumi",
+    "shortDescription": "Frame-by-frame Sumi animation studio",
+    "longDescription": "Take a story through a writer, director, artist, animator, sound designer and checker, guided one step at a time. Every movement is a separate drawing, in Sumi Dark brush, Sumi Light colour pencil or Sumi Vector, drawn in code with no images.",
+    "developerName": "Beyond Tahir",
+    "category": "Creativity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://beyondtahir.github.io/beyondsumi/",
+    "defaultPrompt": [
+      "Set up Beyondsumi and guide me step by step.",
+      "Help me turn my idea into a 30-second Sumi film. Ask me what you need.",
+      "Check what this computer can do, and show me what each Sumi style looks like."
+    ],
+    "brandColor": "#A93A2A",
+    "composerIcon": "./skills/sumi/assets/delivery-dashboard/logo.png",
+    "logo": "./skills/sumi/assets/delivery-dashboard/logo.png"
+  }
+}

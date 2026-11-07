@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 250" width="1280" height="250" role="img" aria-label="Six steps: words, scenes, drawings, movement, sound, checks. You approve each one.">
+<style>
+.bg{fill:#0d0e0d}.name{font:700 26px Georgia,'Times New Roman',serif;fill:#f3efe4}.sub{font:17px -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;fill:#a7a89c}
+.num{font:700 34px Georgia,serif;fill:#f3efe4}.dot{fill:#1d201d;stroke:#3a3d38;stroke-width:2}
+.st .dot{animation:lit 6s infinite;animation-delay:inherit}
+.st{animation:none}
+@keyframes lit{0%,100%{fill:#1d201d;stroke:#3a3d38}4%,16%{fill:#d63b27;stroke:#ff8b74}22%{fill:#2a1814;stroke:#a93a2a}}
+.track{stroke:#3a3d38;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
+.run{stroke:#d63b27;stroke-width:3;stroke-linecap:round;stroke-dasharray:1060;stroke-dashoffset:1060;animation:run 6s linear infinite}
+@keyframes run{0%{stroke-dashoffset:1060}100%{stroke-dashoffset:0}}
+.foot{font:16px -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;fill:#a7a89c}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.run{stroke-dashoffset:0}}
+</style>
+<rect width="1280" height="250" rx="16" class="bg"/>
+<line x1="110" y1="92" x2="1170" y2="92" class="track"/><line x1="110" y1="92" x2="1170" y2="92" class="run"/>
+<g class="st" style="--d:0s"><circle cx="110" cy="92" r="40" class="dot" style="animation-delay:0s"/><text x="110" y="105" text-anchor="middle" class="num">1</text></g>
+<text x="110" y="172" text-anchor="middle" class="name">Words</text><text x="110" y="200" text-anchor="middle" class="sub">The story</text><g class="st" style="--d:1s"><circle cx="322" cy="92" r="40" class="dot" style="animation-delay:1s"/><text x="322" y="105" text-anchor="middle" class="num">2</text></g>
+<text x="322" y="172" text-anchor="middle" class="name">Scenes</text><text x="322" y="200" text-anchor="middle" class="sub">Like a director</text><g class="st" style="--d:2s"><circle cx="534" cy="92" r="40" class="dot" style="animation-delay:2s"/><text x="534" y="105" text-anchor="middle" class="num">3</text></g>
+<text x="534" y="172" text-anchor="middle" class="name">Drawings</text><text x="534" y="200" text-anchor="middle" class="sub">Characters, places</text><g class="st" style="--d:3s"><circle cx="746" cy="92" r="40" class="dot" style="animation-delay:3s"/><text x="746" y="105" text-anchor="middle" class="num">4</text></g>
+<text x="746" y="172" text-anchor="middle" class="name">Movement</text><text x="746" y="200" text-anchor="middle" class="sub">One drawing at a time</text><g class="st" style="--d:4s"><circle cx="958" cy="92" r="40" class="dot" style="animation-delay:4s"/><text x="958" y="105" text-anchor="middle" class="num">5</text></g>
+<text x="958" y="172" text-anchor="middle" class="name">Sound</text><text x="958" y="200" text-anchor="middle" class="sub">Voice, music, effects</text><g class="st" style="--d:5s"><circle cx="1170" cy="92" r="40" class="dot" style="animation-delay:5s"/><text x="1170" y="105" text-anchor="middle" class="num">6</text></g>
+<text x="1170" y="172" text-anchor="middle" class="name">Checks</text><text x="1170" y="200" text-anchor="middle" class="sub">5 viewers + inspector</text>
+<text x="640" y="236" text-anchor="middle" class="foot">You approve each step. If your film has speech, the voice is made before the drawings.</text>
+</svg>

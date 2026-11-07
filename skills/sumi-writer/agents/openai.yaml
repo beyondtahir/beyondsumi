@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sumi Writer"
+  short_description: "Fix a script for animation"
+  default_prompt: "Use $sumi-writer to write or fix my story for a Sumi film."
+  brand_color: "#A93A2A"

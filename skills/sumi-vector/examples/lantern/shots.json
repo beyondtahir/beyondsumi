@@ -1,0 +1,557 @@
+{
+ "title": "The Lantern",
+ "style": "vector",
+ "art_route": "vector",
+ "fps": 24,
+ "size": [
+  1920,
+  1080
+ ],
+ "paper": "#efe3cf",
+ "characters": [
+  "girl"
+ ],
+ "shots": [
+  {
+   "id": "s1-release",
+   "duration": 4.25,
+   "scene_logic": "Dusk on a hill at a small torii gate, the sun low on the left. A steady wind blows to the left, carrying her hair and sash forward. The girl holds a paper sky lantern with a lit flame at her chest, lifts it over her head and lets go. Hot air and the wind carry it up and away toward the sun.",
+   "purpose": "She sends the lantern, and we learn why",
+   "framing": "Wide. The girl on the right, the sun, the gate and the pine on the left",
+   "acting": "Her eyes follow it up. Her arms stay raised after it has gone, then come down slowly",
+   "camera_reason": "A slow push draws us in",
+   "camera": [
+    {
+     "t": 0,
+     "zoom": 1
+    },
+    {
+     "t": 4.25,
+     "zoom": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "name": "world",
+     "role": "background",
+     "kind": "painting",
+     "src": "frames/world/f0001.png"
+    },
+    {
+     "name": "sunglow",
+     "role": "effect",
+     "kind": "painting",
+     "src": "frames/sunglow/f0001.png",
+     "blend": "screen"
+    },
+    {
+     "name": "lanternglow",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/lanternglow",
+     "rate": 24,
+     "blend": "screen",
+     "sequence": "1-102"
+    },
+    {
+     "name": "actors",
+     "role": "character",
+     "kind": "drawings",
+     "frames": "frames/actors",
+     "rate": 24,
+     "travels": true,
+     "sequence": "1-102"
+    },
+    {
+     "name": "grass",
+     "role": "foreground",
+     "kind": "drawings",
+     "frames": "frames/grass",
+     "rate": 24,
+     "sequence": "1-102"
+    },
+    {
+     "name": "leaves",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/leaves",
+     "rate": 24,
+     "sequence": "1-102"
+    }
+   ],
+   "captions": [
+    {
+     "text": "Every autumn,",
+     "start": 0.3,
+     "end": 1.3,
+     "place": {
+      "x": 0.4,
+      "y": 0.13
+     },
+     "mood": "slow"
+    },
+    {
+     "text": "she sent a lantern to her lost brother.",
+     "start": 1.35,
+     "end": 3.95,
+     "place": {
+      "x": 0.4,
+      "y": 0.13
+     },
+     "mood": "slow",
+     "key": [
+      "brother."
+     ]
+    }
+   ],
+   "must_see": [
+    {
+     "t": 1,
+     "see": [
+      "whole girl with feet in the grass",
+      "lantern in both hands"
+     ]
+    },
+    {
+     "t": 2.6,
+     "see": [
+      "open hands with the lantern above them, flying free"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s2-wait",
+   "duration": 3,
+   "scene_logic": "The same hill, closer. Her lantern is tiny now and crosses the sun, far away. She watches, then her head and shoulders sink. It is the tenth year and nothing has ever come back. As the caption says ten autumns, ten faint far lights come up across the sky, one for each lantern she has sent.",
+   "purpose": "Ten years of hope, and the sadness of it",
+   "framing": "Knees up on the right, the sun and the small lantern on the left",
+   "acting": "Long look up, then the head bows and the shoulders drop",
+   "camera_reason": "Close enough to read her head and shoulders",
+   "layers": [
+    {
+     "name": "world",
+     "role": "background",
+     "kind": "painting",
+     "src": "frames/world/f0002.png"
+    },
+    {
+     "name": "sunglow",
+     "role": "effect",
+     "kind": "painting",
+     "src": "frames/sunglow/f0002.png",
+     "blend": "screen"
+    },
+    {
+     "name": "lanternglow",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/lanternglow",
+     "rate": 24,
+     "blend": "screen",
+     "sequence": "103-174"
+    },
+    {
+     "name": "actors",
+     "role": "character",
+     "kind": "drawings",
+     "frames": "frames/actors",
+     "rate": 24,
+     "travels": true,
+     "sequence": "103-174",
+     "may_cut": [
+      "bottom"
+     ]
+    },
+    {
+     "name": "leaves",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/leaves",
+     "rate": 24,
+     "sequence": "103-174"
+    }
+   ],
+   "captions": [
+    {
+     "text": "Ten autumns. No answer.",
+     "start": 0.5,
+     "end": 2.8,
+     "place": {
+      "x": 0.3,
+      "y": 0.45
+     },
+     "mood": "slow",
+     "key": [
+      "answer."
+     ]
+    }
+   ],
+   "must_see": [
+    {
+     "t": 1,
+     "see": [
+      "tiny lantern against the sun"
+     ]
+    },
+    {
+     "t": 2.8,
+     "see": [
+      "ten faint lights in the sky",
+      "head bowed"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s3-turn",
+   "duration": 3.5,
+   "scene_logic": "The hill again, wide. The wind that has blown left all evening drops, then turns and blows from the left, so her hair, sash, sleeves, grass and the leaves all swing to the right. The turned wind carries one small light in from the far left, over the ridge, toward her. She lifts her head.",
+   "purpose": "The turn of the story",
+   "framing": "Wide again, plenty of sky on the left for the light",
+   "acting": "She feels the wind on her back hair first, then raises her head",
+   "camera_reason": "Held still, so the small light is what moves",
+   "layers": [
+    {
+     "name": "world",
+     "role": "background",
+     "kind": "painting",
+     "src": "frames/world/f0003.png"
+    },
+    {
+     "name": "sunglow",
+     "role": "effect",
+     "kind": "painting",
+     "src": "frames/sunglow/f0003.png",
+     "blend": "screen"
+    },
+    {
+     "name": "lanternglow",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/lanternglow",
+     "rate": 24,
+     "blend": "screen",
+     "sequence": "175-258"
+    },
+    {
+     "name": "actors",
+     "role": "character",
+     "kind": "drawings",
+     "frames": "frames/actors",
+     "rate": 24,
+     "travels": true,
+     "sequence": "175-258"
+    },
+    {
+     "name": "grass",
+     "role": "foreground",
+     "kind": "drawings",
+     "frames": "frames/grass",
+     "rate": 24,
+     "sequence": "175-258"
+    },
+    {
+     "name": "leaves",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/leaves",
+     "rate": 24,
+     "sequence": "175-258"
+    }
+   ],
+   "captions": [
+    {
+     "text": "Then the wind turned,",
+     "start": 0.7,
+     "end": 2.05,
+     "place": {
+      "x": 0.42,
+      "y": 0.13
+     },
+     "mood": "slow",
+     "key": [
+      "turned,"
+     ]
+    },
+    {
+     "text": "and one came back.",
+     "start": 2.05,
+     "end": 3.45,
+     "place": {
+      "x": 0.42,
+      "y": 0.13
+     },
+     "mood": "slow",
+     "key": [
+      "back."
+     ]
+    }
+   ],
+   "must_see": [
+    {
+     "t": 1.2,
+     "see": [
+      "hair and sash blowing to the right"
+     ]
+    },
+    {
+     "t": 3.2,
+     "see": [
+      "lantern coming from the left, head raised"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s4-catch",
+   "duration": 2.25,
+   "scene_logic": "The returning lantern's flame is low, so it sinks to her. She reaches up with both hands and rises on her toes, sleeves falling back from her arms, and takes it. Then she brings it down.",
+   "purpose": "She catches it",
+   "framing": "Thighs up, arms and lantern in clear sky",
+   "acting": "A reach, a rise, hands close, then it comes down to her chest",
+   "camera_reason": "Close on the catch",
+   "layers": [
+    {
+     "name": "world",
+     "role": "background",
+     "kind": "painting",
+     "src": "frames/world/f0004.png"
+    },
+    {
+     "name": "sunglow",
+     "role": "effect",
+     "kind": "painting",
+     "src": "frames/sunglow/f0004.png",
+     "blend": "screen"
+    },
+    {
+     "name": "lanternglow",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/lanternglow",
+     "rate": 24,
+     "blend": "screen",
+     "sequence": "259-312"
+    },
+    {
+     "name": "actors",
+     "role": "character",
+     "kind": "drawings",
+     "frames": "frames/actors",
+     "rate": 24,
+     "travels": true,
+     "sequence": "259-312",
+     "may_cut": [
+      "bottom"
+     ]
+    },
+    {
+     "name": "leaves",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/leaves",
+     "rate": 24,
+     "sequence": "259-312"
+    }
+   ],
+   "must_see": [
+    {
+     "t": 1.3,
+     "see": [
+      "both open hands joined to the arms, under the lantern"
+     ]
+    },
+    {
+     "t": 1.8,
+     "see": [
+      "hands holding the lantern"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s5-answer",
+   "duration": 4,
+   "scene_logic": "Close, in profile, the sun behind them. She holds the lantern in both hands and turns it. Writing comes round from the far side: I SAW THEM ALL. She bows her head to read it, her eyes close, and she pulls the lantern to her chest and bends over it, shaking slightly.",
+   "purpose": "The answer to the story: he is alive, and he saw every lantern",
+   "framing": "Bust in profile on the right, the lantern filling the left, both against the sun",
+   "acting": "Reads with head bowed, breath catches, eyes close, she pulls it in and bends over it",
+   "camera_reason": "A slow push on the answer",
+   "camera": [
+    {
+     "t": 0,
+     "zoom": 1
+    },
+    {
+     "t": 4,
+     "zoom": 1.04
+    }
+   ],
+   "layers": [
+    {
+     "name": "world",
+     "role": "background",
+     "kind": "painting",
+     "src": "frames/world/f0005.png"
+    },
+    {
+     "name": "sunglow",
+     "role": "effect",
+     "kind": "painting",
+     "src": "frames/sunglow/f0005.png",
+     "blend": "screen"
+    },
+    {
+     "name": "lanternglow",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/lanternglow",
+     "rate": 24,
+     "blend": "screen",
+     "sequence": "313-408"
+    },
+    {
+     "name": "actors",
+     "role": "character",
+     "kind": "drawings",
+     "frames": "frames/actors",
+     "rate": 24,
+     "travels": true,
+     "sequence": "313-408",
+     "may_cut": [
+      "bottom",
+      "right"
+     ]
+    },
+    {
+     "name": "leaves",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/leaves",
+     "rate": 24,
+     "sequence": "313-408"
+    }
+   ],
+   "captions": [
+    {
+     "text": "On it, in his writing:",
+     "start": 0.4,
+     "end": 1.9,
+     "place": {
+      "x": 0.28,
+      "y": 0.1
+     },
+     "mood": "slow",
+     "key": [
+      "his"
+     ]
+    }
+   ],
+   "must_see": [
+    {
+     "t": 1.5,
+     "see": [
+      "the words I SAW THEM ALL fully readable on the lantern",
+      "both hands cupping it from below"
+     ]
+    },
+    {
+     "t": 3.7,
+     "see": [
+      "lantern pulled to her chest",
+      "head bent over it"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s6-night",
+   "duration": 3,
+   "scene_logic": "Night is falling. From behind the great gate, looking back up the hill, she stands small, between its posts, bent over the lantern at her chest. It is the only light left. The wind has dropped. The picture fades out.",
+   "purpose": "A breath after the answer, and a new angle. She is not alone now",
+   "framing": "A far shot framed by the dark torii, her small figure and the one light in the middle",
+   "acting": "She stays bent over it, shaking a little",
+   "camera_reason": "A slow pull back lets us leave her there",
+   "camera": [
+    {
+     "t": 0,
+     "zoom": 1.06
+    },
+    {
+     "t": 3,
+     "zoom": 1
+    }
+   ],
+   "layers": [
+    {
+     "name": "world",
+     "role": "background",
+     "kind": "painting",
+     "src": "frames/world/f0006.png"
+    },
+    {
+     "name": "sunglow",
+     "role": "effect",
+     "kind": "painting",
+     "src": "frames/sunglow/f0006.png",
+     "blend": "screen"
+    },
+    {
+     "name": "dusk",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/dusk",
+     "rate": 24,
+     "sequence": "409-480"
+    },
+    {
+     "name": "lanternglow",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/lanternglow",
+     "rate": 24,
+     "blend": "screen",
+     "sequence": "409-480"
+    },
+    {
+     "name": "actors",
+     "role": "character",
+     "kind": "drawings",
+     "frames": "frames/actors",
+     "rate": 24,
+     "travels": true,
+     "sequence": "409-480",
+     "may_cut": [
+      "bottom"
+     ]
+    },
+    {
+     "name": "leaves",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/leaves",
+     "rate": 24,
+     "sequence": "409-480"
+    },
+    {
+     "name": "fade",
+     "role": "effect",
+     "kind": "drawings",
+     "frames": "frames/fade",
+     "rate": 24,
+     "sequence": "409-480"
+    }
+   ],
+   "must_see": [
+    {
+     "t": 0.8,
+     "see": [
+      "whole small figure between the posts of the gate",
+      "the lantern lit against her chest"
+     ]
+    }
+   ]
+  }
+ ]
+}

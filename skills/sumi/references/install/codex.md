@@ -1,6 +1,21 @@
 # Install Beyondsumi in Codex
 
-This guide assumes Codex is already installed. If it is missing, ask the assistant to explain its official installation before you approve a download. Start with [the shared preparation steps](shared.md); do not run commands from inside the ZIP.
+This guide assumes Codex is already installed. If it is missing, ask the assistant to explain its official installation before you approve a download.
+
+## The plugin way
+
+Run these two commands, or paste them into Codex and ask it to run them:
+
+```sh
+codex plugin marketplace add beyondtahir/beyondsumi
+codex plugin add beyondsumi@beyondsumi
+```
+
+Open a new Codex chat and choose one of Beyondsumi's starter prompts, or say "Use Beyondsumi". The first-time helper then welcomes you in the chat. Skip to step 6 below for Full access.
+
+## The ZIP way
+
+Start with [the shared preparation steps](shared.md); do not run commands from inside the ZIP.
 
 1. Open the extracted Beyondsumi folder. You should see `install.py` and a folder named `skills`.
 2. Open a terminal in that folder. On macOS, Finder can open a terminal at a folder; on Windows, open the folder in Explorer, type `powershell` in its address bar and press Enter. If you are unsure, show this guide to your local assistant and ask it to do this step.
@@ -16,8 +31,9 @@ On Windows PowerShell, use:
 py -3 install.py --skills-root "$env:USERPROFILE\.agents\skills"
 ```
 
-4. Look for four installed names and the requirements report. This copies the skills and checks tools; it does not buy API usage or download voice models. If Python is missing or a skill already exists, use [the troubleshooting steps](shared.md#when-something-does-not-work).
-5. Restart or open a fresh Codex chat, then ask it to use the sumi skill. In this project Codex already loads the suite; a new machine still needs its own capability check.
-6. Paste the first-use request from [the simple usage guide](../beginner-use.md). Expect a welcome, a capability check and choices for art, voice and sound before a film starts.
+4. Look for the ten installed skills and the requirements report. This copies the skills and checks tools; it does not buy API usage or download voice models. If Python is missing or a skill already exists, use [the troubleshooting steps](shared.md#when-something-does-not-work).
+5. Restart or open a fresh Codex chat, then ask it to use the sumi skill.
+6. Give your film project Full access in Codex, when it asks. Codex's sandbox stops the browser that draws and checks your film from starting. In the Codex app, choose Full access in the permissions menu. In the terminal, start Codex with `codex --sandbox danger-full-access`. This lets Codex change any file on your computer, so use it only with work you trust.
+7. Paste the first-use request from [the simple usage guide](../beginner-use.md). Expect a welcome, a capability check and choices for art, voice and sound before a film starts.
 
 [Official Codex skills documentation](https://learn.chatgpt.com/docs/build-skills). Checked 26 October 2026. See [test scope](shared.md#what-has-been-tested) before treating this as an end-to-end host certificate.

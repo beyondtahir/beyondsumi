@@ -1,0 +1,59 @@
+{
+  "version": "2.0.0",
+  "catalog_id": "studio-styles-v6",
+  "output_fps": 24,
+  "cells_per_sheet": 12,
+  "styles": {
+    "dark": {
+      "name": "Sumi Dark",
+      "short_description": "Black and white brush, always with vivid red and one more vibrant colour, for horror, mystery and adventure.",
+      "recommended_for": "horror, mystery and adventure",
+      "paper": "#f2eee4",
+      "rules": {
+        "parallax": "separate-images",
+        "background": "painting-or-drawn",
+        "min_character_rate": 12,
+        "min_background_rate": 0,
+        "transitions": [
+          "cut",
+          "drawn"
+        ]
+      },
+      "art_route": "images"
+    },
+    "light": {
+      "name": "Sumi Light",
+      "short_description": "Clear, dark colour pencil sketch, for children's stories and love stories.",
+      "recommended_for": "children's stories and love stories",
+      "paper": "#f4eedf",
+      "rules": {
+        "parallax": "forbidden",
+        "background": "drawn",
+        "min_character_rate": 12,
+        "min_background_rate": 6,
+        "transitions": [
+          "cut",
+          "drawn"
+        ]
+      },
+      "art_route": "images"
+    },
+    "vector": {
+      "name": "Sumi Vector",
+      "short_description": "Clean lines and flat colour on painted skies, drawn in code with no images, for any story.",
+      "recommended_for": "any story, and anyone without an image tool",
+      "paper": "#efe3cf",
+      "art_route": "vector",
+      "rules": {
+        "parallax": "forbidden",
+        "background": "painting-or-drawn",
+        "min_character_rate": 12,
+        "min_background_rate": 0,
+        "transitions": [
+          "cut",
+          "dissolve"
+        ]
+      }
+    }
+  }
+}

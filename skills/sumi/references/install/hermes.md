@@ -16,8 +16,8 @@ On Windows PowerShell, use:
 py -3 install.py --skills-root "$env:USERPROFILE\.hermes\skills"
 ```
 
-4. Look for four installed names and the requirements report. This copies the skills and checks tools; it does not buy API usage or download voice models. If Python is missing or a skill already exists, use [the troubleshooting steps](shared.md#when-something-does-not-work).
-5. Run hermes skills list --source local and check the four names. Open a fresh Hermes session and ask it to use sumi. A custom Hermes profile uses its own documented HERMES_HOME; choose that profile's skills folder instead of installing another copy blindly.
+4. Look for the ten installed skills and the requirements report. This copies the skills and checks tools; it does not buy API usage or download voice models. If Python is missing or a skill already exists, use [the troubleshooting steps](shared.md#when-something-does-not-work).
+5. Run hermes skills list --source local and check the ten names. Open a fresh Hermes session and ask it to use sumi. A custom Hermes profile uses its own documented HERMES_HOME; choose that profile's skills folder instead of installing another copy blindly.
 6. Paste the first-use request from [the simple usage guide](../beginner-use.md). Expect a welcome, a capability check and choices for art, voice and sound before a film starts.
 
 [Official Hermes Agent skills documentation](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills). Checked 26 October 2026. See [test scope](shared.md#what-has-been-tested) before treating this as an end-to-end host certificate.
